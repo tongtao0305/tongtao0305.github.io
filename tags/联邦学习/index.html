@@ -49,26 +49,26 @@
   <meta name="description" content="现就读于北航计算机学院本科">
 <meta property="og:type" content="website">
 <meta property="og:title" content="童涛的个人博客">
-<meta property="og:url" content="http://tongtao.me/index.html">
+<meta property="og:url" content="http://tongtao.me/tags/%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="童涛的个人博客">
 <meta property="og:description" content="现就读于北航计算机学院本科">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="童涛">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://tongtao.me/">
+<link rel="canonical" href="http://tongtao.me/tags/%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
+    isHome: false,
     isPost: false
   };
 </script>
 
-  <title>童涛的个人博客</title>
+  <title>标签: 联邦学习 | 童涛的个人博客</title>
   
 
 
@@ -182,170 +182,47 @@
           <div class="content">
             
 
-  <div class="posts-expand">
-        
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://tongtao.me/2020/01/11/%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E4%B8%8E%E7%8E%B0%E6%9C%89%E7%A0%94%E7%A9%B6%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="童涛">
-      <meta itemprop="description" content="现就读于北航计算机学院本科">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="童涛的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/11/%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E4%B8%8E%E7%8E%B0%E6%9C%89%E7%A0%94%E7%A9%B6%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB/" class="post-title-link" itemprop="url">联邦学习与现有研究的区别和联系</a>
+  
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        <h1 class="collection-header">联邦学习
+          <small>标签</small>
         </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-01-11 19:05:22 / 修改时间：19:12:14" itemprop="dateCreated datePublished" datetime="2020-01-11T19:05:22+08:00">2020-01-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
-                    <span itemprop="name">联邦学习</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-	
-      
-          <h2 id="差分隐私理论"><a href="#差分隐私理论" class="headerlink" title="差分隐私理论"></a>差分隐私理论</h2><p>​        联邦学习采用的是<strong>加密机制下的参数交换的方式</strong>，加密手段包括同态加密等。与传统的差分隐私保护方式相比，<strong>其自身的数据和模型并不会发生传输</strong>，这样也就不会产生数据泄露的问题，同时也可以避免一些严格的法律程序例如GDPR带来的麻烦。</p>
-<p>​        而差分隐私保护理论以及其它的传统的隐私保护方法，更多的是在数据中添加噪点，或者用概括化的方法模糊某些敏感的属性，直到第三方无法区别个体为止，也就是说其主要目标是<strong>数据不可被还原</strong>，以此来保护用户隐私。但是从本质上来说，这些方法还是<strong>有原始数据的传输</strong>，存在被攻破的风险。</p>
-<h2 id="分布式机器学习"><a href="#分布式机器学习" class="headerlink" title="分布式机器学习"></a>分布式机器学习</h2><p>​        分布式机器学习包括了数据分布式存储、计算任务分布式运行、模型结果分布式发布等多个方面。以参数服务器为例，他将数据存储在不同的节点上，通过<strong>一个中心式的调度节点来调配数据和计算资源</strong>，以便更加高效地获得最终的训练模型。</p>
-<p>​        而对于联邦学习而言，最重要的一点是<strong>数据拥有方对数据拥有完全的自治权限</strong>，可以自主选择何时加入学习模型，相对在参数服务器中，中心节点始终占据着主导地位，这也导致联邦学习面对的是一个更加复杂的学习环境；其次，联邦学习<strong>更加注重训练过程中对于数据拥有方的隐私保护</strong>，能够更好地应对未来日趋严格的数据保护需求和安全监管环境。</p>
-<h2 id="联邦数据库"><a href="#联邦数据库" class="headerlink" title="联邦数据库"></a>联邦数据库</h2><p>​        联邦数据库是将不同的单元数据库进行集成，并对集成后的数据整体进行管理的系统。它的提出是为了<strong>实现对多个独立数据库的相互操作</strong>。虽然联邦数据库在数据的类型和存储方式上与联邦学习有许多相似之处，但是，<strong>联邦数据库在各个单元数据交互的过程中不涉及任何的隐私保护机制</strong>，所有单元数据库对管理系统的都是可见的。此外<strong>联邦数据库的重心在于插入、删除、查找、合并等各种数据库的基本操作</strong>，而联邦学习的目的在于保护数据隐私的前提下对各个数据建立一个联合模型，让数据中的隐藏的模式和规律发挥更大的价值。</p>
+      </div>
 
       
+    <div class="collection-year">
+      <h1 class="collection-header">2020</h1>
     </div>
 
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-		<!个人修改>
-		<div>
-		
-		</div>	  
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2020-01-11T19:05:22+08:00"
+              content="2020-01-11">
+          01-11
+        </time>
+      </div>
 
-    
-    
-      
-	  <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
+      <h2 class="post-title">
+          <a class="post-title-link" href="/2020/01/11/%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E4%B8%8E%E7%8E%B0%E6%9C%89%E7%A0%94%E7%A9%B6%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB/" itemprop="url">
+            <span itemprop="name">联邦学习与现有研究的区别和联系</span>
+          </a>
+      </h2>
+
+    </header>
   </article>
-  
-  
-  
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://tongtao.me/2020/01/11/%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E7%AB%A5%E6%B6%9B%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="童涛">
-      <meta itemprop="description" content="现就读于北航计算机学院本科">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="童涛的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/11/%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E7%AB%A5%E6%B6%9B%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">欢迎来到童涛的个人博客</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-01-11 14:45:06 / 修改时间：18:55:11" itemprop="dateCreated datePublished" datetime="2020-01-11T14:45:06+08:00">2020-01-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-	
-      
-          <p>​        非常欢迎大家来到我的个人博客。</p>
-<p>​        首先要说明的是，这个博客基于GitHub Pages和Hexo建立，在NeXT. Gemini主题的基础上加以修改而来。由于服务器位于国外，所以在国内访问偶尔会出现加载速度慢甚至加载不出来的情况。如果大家发现网站存在bug或者文字中有不妥之处，想跟我交流，可以点击页面左侧的个人介绍栏邮箱链接跟我联系。同时我会在我的GitHub主页内，上传我所写的代码，大家可以前去查看交流。</p>
-<p>​        在这里，我会跟大家分享如下内容：    </p>
-<ol>
-<li><p>北航计算机学院相关课程的总结与收获</p>
-</li>
-<li><p>参加的北航冯如杯项目介绍与进展</p>
-</li>
-<li><p>参与的实验室<del>非涉密</del>项目的心得体会</p>
-</li>
-<li><p>课余时间的读书和观影报告</p>
-</li>
-<li><p>一些零零散散的个人随笔</p>
-</li>
-</ol>
-<p>​        用文字记录学习以及生活是一件很有意思的事情，我会尽量坚持更新这个博客。同时在近期，我也会增加留言板等功能以丰富这个网站的交互体验，敬请期待。</p>
-<p>​        最后，我一直相信，每个故事都会有个美好的结局，如果现在还不够美好，那是因为还没有到终点。希望大家一起坚持努力，乐观积极地迎接生活的挑战！</p>
-<p>​        祝好！</p>
-
-      
     </div>
-
-
-		<!个人修改>
-		<div>
-		
-		</div>	  
-
-    
-    
-      
-	  <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
+  
+  
+  
 
   
 
