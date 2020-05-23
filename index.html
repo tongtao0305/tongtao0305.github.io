@@ -1088,6 +1088,337 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://tongtao.me/2020/04/18/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%BA%8C%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="童涛">
+      <meta itemprop="description" content="现就读于北航计算机学院本科">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="童涛的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/18/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%BA%8C%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">面向对象第二单元总结博客</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-18 16:54:35" itemprop="dateCreated datePublished" datetime="2020-04-18T16:54:35+08:00">2020-04-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-24 00:07:07" itemprop="dateModified" datetime="2020-05-24T00:07:07+08:00">2020-05-24</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/18/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%BA%8C%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%BA%8C%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+	
+      
+          <p>这个单元中，我们主要通过电梯调度相关的程序学习了多线程以及一些常见的设计模式。</p>
+<h2 id="一、总结分析设计策略"><a href="#一、总结分析设计策略" class="headerlink" title="一、总结分析设计策略"></a>一、总结分析设计策略</h2><h3 id="第一次作业"><a href="#第一次作业" class="headerlink" title="第一次作业"></a>第一次作业</h3><blockquote>
+<p>本次作业，需要完成的任务为<strong>单部多线程可捎带电梯</strong>的模拟。                                        ——第一次作业指导书</p>
+</blockquote>
+<p>第一次作业的难度并不大，主要是要初步掌握 Java 多线程程序的编写方法，尤其是保证多线程协作时的线程安全。为了达到这个目标，我们需要对相关方法或者成员变量进行加锁，我在这次作业中选择的是 synchronized 将 PassengerQueue 类中的 addPassenger 和 subPassenger 方法进行加锁。从而不管是输入线程向缓冲队列添加乘客请求还是电梯线程从缓冲队列获取请求，都不会产生数据冲突，尽可能保证线程安全。</p>
+<p>我在这次作业中的设计模式，主要是参考<strong>生产者/消费者</strong>模式。采用了输入线程和电梯线程双线程的方法，输入线程主动添加乘客请求，电梯线程当电梯内为空即没有主请求的时候主动向缓冲队列获取请求。而缓冲队列相对而言只是承担了维护缓冲队列，也就是正在电梯外等待的乘客请求的容器。</p>
+<p>在这次作业的过程中，相较之下，主要的困难在于初步掌握 Java 多线程的编写方法以及调试方法。</p>
+<h3 id="第二次作业"><a href="#第二次作业" class="headerlink" title="第二次作业"></a>第二次作业</h3><blockquote>
+<p>本次作业，需要完成的任务为<strong>多部多线程可捎带调度电梯</strong>的模拟。                                ——第二次作业指导书</p>
+</blockquote>
+<p>第二次作业相较于第一次作业增加了在程序开始时输入电梯数量的要求，同时对电梯中乘客数量也做了限制。随着电梯数量的增加，多部电梯协同调度算法也开始重要起来。</p>
+<p>我在第二次作业的主要架构上，跟第一次作业没有大的变动，主要是在生产者/消费者模型的基础上，参考 <strong>Worker Thread 模式</strong>在细节上进行了一些修改。在第一次作业中，我的电梯进程是由 MainClass 直接产生并启动的，在这次作业中，由于电梯初始数量不确定，将这些任务都交给 MainClass 代码就不够有层次化了，也不符合主类尽可能简洁的要求。所以，我把这一个任务交给了 Channel，在 Channel 构建方法中根据电梯线程数量进行初始化，建立了 elevatorPool 对电梯进程进行统一管理，然后新建一个独立的方法来启动电梯。这样做，在一定程度上降低了类之间耦合性。</p>
+<h3 id="第三次作业"><a href="#第三次作业" class="headerlink" title="第三次作业"></a>第三次作业</h3><blockquote>
+<p>本次作业，需要完成的任务为<strong>多部多线程可捎带调度电梯</strong>的模拟。                                ——第三次作业指导书</p>
+</blockquote>
+<p>虽然在指导书的概述中与第二次作业没有任何差别，但是实际上相对于第二次作业还是有很大的不同的。主要是在前两次作业的基础上，增加了<strong>电梯停靠楼层</strong>以及运行过程中添加电梯的要求。后一个条件其实并没有带来很大的变化，主要是电梯停靠楼层的加入进而产生了一些换乘的需求。这些换乘需要进行一些宏观调度，不能单纯的将一个乘客请求调度至某个电梯，因为其有可能还要再次搭乘电梯。</p>
+<p>第三次作业我用了两种架构来完成。</p>
+<h4 id="第一种架构"><a href="#第一种架构" class="headerlink" title="第一种架构"></a>第一种架构</h4><p>第一种架构是在我前两次作业的基础上迭代而来。主要是将 PersonRequest 包装成了 LiftRequest 类，在这个类中增加了对于是否需要换乘的判断，以及换乘的楼层、电梯等相关信息。将原来缓冲队列中的 PersonRequest 元素全部换成了 LiftRequest 元素，有助于换乘时进行判断。除此之外，大体上还是继承了之前的思路。</p>
+<h4 id="第二种架构"><a href="#第二种架构" class="headerlink" title="第二种架构"></a>第二种架构</h4><p>第二种架构是因为感觉原来的架构中的<strong>调度器担负的任务过多</strong>，不太符合面向对象的相关需求，对其进行拆分。</p>
+<p>我建立了两层的 Scheduler 类，分为宏观调度和微观调度，分别对应 MasterScheduler 和 SlaveScheduler，均继承自 AbstractScheduler 接口。前者从 InputHandler 中获取乘客请求和电梯请求，然后根据不同的电梯分别加入不同种类电梯的专属调度器。后者在相同种类的电梯进程间进行调度。</p>
+<p><strong>简单来讲，主调度器判断需要搭乘的电梯类型，从调度器选择在该电梯类型中选择具体的电梯。</strong></p>
+<p>不同于前两次作业，除了输入进程结束以及缓冲队列为空，调度器的结束还要加入换乘乘客全部乘上第二部电梯的要求。考虑以下情况：</p>
+<p>最后一名旅客需要换乘，在搭乘第一部电梯时，MasterScheduler 中的缓冲队列为空同时输入进程也已经关闭，但是之后还有这名乘客还需要再次加入主调度器判断需要搭乘的下一部电梯类型。</p>
+<p>所以，为了保证需要换乘的乘客请求都能圆满地到达目的地。我在主调度器中保存了需要换乘的乘客名单，将进程结束的判断条件在输入进程结束、缓冲队列对空的基础上加入了需要换成的乘客为空的条件。以此来避免电梯进程提前结束的情况。</p>
+<p>在第二种架构中，我还使用了 CopyOnWriteArrayList 来代替 ArrayList 以提高程序的线程安全性。</p>
+<h2 id="二、总结分析架构设计的可扩展性"><a href="#二、总结分析架构设计的可扩展性" class="headerlink" title="二、总结分析架构设计的可扩展性"></a>二、总结分析架构设计的可扩展性</h2><ul>
+<li><strong>从设计原则检查角度，检查自己的设计，并按照 SOLID 列出所存在的问题。</strong></li>
+</ul>
+<h4 id="SRP-单一责任原则"><a href="#SRP-单一责任原则" class="headerlink" title="SRP 单一责任原则"></a>SRP 单一责任原则</h4><p>由于前两次作业的调度并不是很复杂，所以我主要分为三个部分：输入线程读取请求、调度器保存缓冲队列并响应电梯进程的获取乘客的请求、电梯进程运送乘客当电梯为空时从调度器获取乘客请求。</p>
+<p>在第三次作业中由于调度器的任务越来越繁重，我在按照原来的架构实现相关需求之后，对调度器进行了拆分，分为了主调度器和从调度器。前者主要负责从输入进程读取乘客请求并判断乘客需要的电梯类型并传送至专属的从调度器；后者则是在电梯类型的基础上选择具体的电梯来运送乘客。这样做，较好地满足了 SRP 的原则。</p>
+<h4 id="OCP-开放封闭原则"><a href="#OCP-开放封闭原则" class="headerlink" title="OCP 开放封闭原则"></a>OCP 开放封闭原则</h4><p>这次的作业中我的电梯进程除了在后两次作业中根据电梯类型添加了运行速度、载客量等变量之外，主体的函数并没有产生较大的变化，较为符合 OCP 原则。我的调度器则是进行了多次重构，在第三次作业中由于任务过于繁重进行了拆分。由于在第一次作业中对之后可能涉及的要求考虑不是很全面，导致了一定的重构，这点还是需要进一步改善。</p>
+<h4 id="LSP-里氏替换原则"><a href="#LSP-里氏替换原则" class="headerlink" title="LSP 里氏替换原则"></a>LSP 里氏替换原则</h4><p>第三次作业的第二种架构中，我的主调度器和从调度器均继承自 AbstractScheduler 抽象类，也都实现了该类中的抽象方法，可以做到子类对父类的替换。</p>
+<h4 id="ISP-接口分离原则"><a href="#ISP-接口分离原则" class="headerlink" title="ISP 接口分离原则"></a>ISP 接口分离原则</h4><p>本次作业中未涉及接口。</p>
+<h4 id="DIP-依赖倒置原则"><a href="#DIP-依赖倒置原则" class="headerlink" title="DIP 依赖倒置原则"></a>DIP 依赖倒置原则</h4><p>依赖倒置原则要求程序尽量依赖于抽象接口，不依赖于具体实现。简单来说，就是要程序尽可能对抽象进行编程。在这一点上，我觉得我还有一定差距。由于这次程序并没有太多的继承层次，所以我的输入进程以及电梯都没有继承自抽象接口，如果后续不同种类的电梯内部的实现差异更大的话，可以新建一个电梯的抽象类。</p>
+<h2 id="三、基于度量来分析自己的程序结构"><a href="#三、基于度量来分析自己的程序结构" class="headerlink" title="三、基于度量来分析自己的程序结构"></a>三、基于度量来分析自己的程序结构</h2><ul>
+<li><strong>度量类的属性个数、方法个数、每个方法规模、每个方法的控制分支数目、类总代码规模</strong></li>
+<li><strong>计算经典的 OO 度量</strong></li>
+<li><strong>画出自己作业的类图，并自我点评优点和缺点，要结合类图做分析</strong></li>
+<li><strong>通过 UML 的协作图（sequence diagram）来展示线程之间的协作关系（别忘记主线程）</strong></li>
+</ul>
+<h3 id="第一次作业-1"><a href="#第一次作业-1" class="headerlink" title="第一次作业"></a>第一次作业</h3><p>以下是第一次作业的 UML 图。</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw5_uml.jpg" alt=""></p>
+<p>以下是第一次作业的代码数量。</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw5_statistic.jpg" alt=""></p>
+<p>以下是第一次作业的复杂度分析。（由于插件使用异常，等可以正常使用后再补充）</p>
+<h3 id="第二次作业-1"><a href="#第二次作业-1" class="headerlink" title="第二次作业"></a>第二次作业</h3><p>以下是第二次作业的 UML 图。</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw6_uml.jpg" alt=""></p>
+<p>以下是第二次作业的代码数量。</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw6_statistic.jpg" alt=""></p>
+<h3 id="第三次作业-1"><a href="#第三次作业-1" class="headerlink" title="第三次作业"></a>第三次作业</h3><h4 id="第一种架构-1"><a href="#第一种架构-1" class="headerlink" title="第一种架构"></a>第一种架构</h4><p>以下是第三次作业第一种架构的 UML 图和代码数量。</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw7_uml_1.jpg" alt=""></p>
+<p>以下是第三次作业第一种架构的代码数量。</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw7_statistic_1.jpg" alt=""></p>
+<h4 id="第二种架构-1"><a href="#第二种架构-1" class="headerlink" title="第二种架构"></a>第二种架构</h4><p>以下是第三次作业第二种架构的 UML 图和代码数量。</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw7_uml_2.jpg" alt=""></p>
+<p>以下是第三次作业第二种架构代码数量。</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw7_statistic_2.jpg" alt=""></p>
+<h2 id="四、分析自己程序的-bug"><a href="#四、分析自己程序的-bug" class="headerlink" title="四、分析自己程序的 bug"></a>四、分析自己程序的 bug</h2><ul>
+<li><strong>分析未通过的公测用例和被互测发现的bug：特征、问题所在的类和方法</strong></li>
+<li><strong>特别注意分析那些与线程安全相关的问题（特别要注意死锁的分析）</strong></li>
+</ul>
+<p>第一次作业时出现了一个严重的错误，就是我对 ALS 调度算法的理解出现了一定的偏差，同时由于中测中并没有对运行时间进行一定的要求，导致我没能发现我的理解错误，进而导致我的程序在强测中全部出现了超时的情况，最终没能进入互测。</p>
+<p>在第二次作业中，我的程序主要出现了部分时候第一个乘客请求会被忽略的问题。在 debug 的时候发现，这是有同学在评论区已经分享过的错误，主要是由两个 Scanner 造成的。这也提醒了我平时要多关注评论区的相关分享。</p>
+<p>在第三次作业中，我的主要问题是部分时候在程序运行结束后有电梯进程没有结束的问题。</p>
+<h2 id="五、分析自己发现别人程序-bug-所采用的策略"><a href="#五、分析自己发现别人程序-bug-所采用的策略" class="headerlink" title="五、分析自己发现别人程序 bug 所采用的策略"></a>五、分析自己发现别人程序 bug 所采用的策略</h2><ul>
+<li><strong>列出自己所采取的测试策略及有效性</strong></li>
+<li><strong>分析自己采用了什么策略来发现线程安全相关的问题</strong></li>
+<li><strong>分析本单元的测试策略与第一单元测试策略的差异之处</strong></li>
+</ul>
+<p>本单元的测试我还是采用手动结合自动化测试的方法。因为本单元的作业不像上一个单元有很多的特殊情况，而更加注重程序的性能。而在正确性方面，只要能解决好线程安全的问题，经过一定的正确性测试，就不会有太大的问题。</p>
+<p>在本单元作业中，我会先测试上一次作业的强测数据以及自己手动的测试数据进行一定的正确性测试，然后结合结束输入的时间来进行一定的线程安全的测试，主要是看输入结束后程序能否在正确地运送完所有乘客后关闭电梯进程。本单元的测试相对来说主要是线程安全的问题，我认为只要程序的线程调度较为科学，应该可以避免大部分的线程安全问题。</p>
+<h2 id="六、心得体会"><a href="#六、心得体会" class="headerlink" title="六、心得体会"></a>六、心得体会</h2><ul>
+<li><strong>从线程安全和设计原则两个方面来梳理自己在本单元三次作业中获得的心得体会。</strong></li>
+</ul>
+<p>在这一单元的学习中，我接触学习了很多关于多线程的设计模式。</p>
+<ul>
+<li>生产者 - 消费者 模式</li>
+<li>Worker - Thread 模式</li>
+</ul>
+<p>这两个是我们在理论课和实验课上主要学习的两种常见的设计模式。</p>
+<p>在课外，我还阅读了《图解 Java 多线程设计模式》一书，并通过网络上的相关资料，了解了更多的多线程设计模式。</p>
+<p>比如在生成输入进程的时候，我尝试使用了单例模式的双检锁校验，能在安全的前提下保持较高的性能。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> InputHandler <span class="title">getInputHandler</span><span class="params">(Scheduler scheduler)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (inputThread == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (InputHandler<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (inputThread == <span class="keyword">null</span>) &#123;</span><br><span class="line">                inputThread = <span class="keyword">new</span> InputHandler(scheduler);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> inputThread;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个单元的学习，是我第一次接触多线程编程，在调试多线程时难以复现的 bug 以及莫名其妙的死锁都令人印象深刻。我希望我能在课下学习更多的多线程编程的设计模式，在以后的学习生活中，更加科学准确且高性能地应用多线程的相关知识。</p>
+
+      
+    </div>
+
+
+		<!个人修改>
+		<div>
+		
+		</div>	  
+
+    
+    
+      
+	  <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://tongtao.me/2020/03/20/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%B8%80%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="童涛">
+      <meta itemprop="description" content="现就读于北航计算机学院本科">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="童涛的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%B8%80%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">面向对象第一单元总结博客</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 18:56:35" itemprop="dateCreated datePublished" datetime="2020-03-20T18:56:35+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-24 00:01:59" itemprop="dateModified" datetime="2020-05-24T00:01:59+08:00">2020-05-24</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/20/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%B8%80%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/20/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%B8%80%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+	
+      
+          <h2 id="一、基于度量来分析自己的程序结构"><a href="#一、基于度量来分析自己的程序结构" class="headerlink" title="一、基于度量来分析自己的程序结构"></a>一、基于度量来分析自己的程序结构</h2><h3 id="第一次作业"><a href="#第一次作业" class="headerlink" title="第一次作业"></a>第一次作业</h3><p>第一次作业中，我主要把程序分为了三个层次：MainClass - Polynomial - Monomial，其中多项式之间通过x或者数字后紧接的加减符号进行分割，之后将各个项通过正则表达式进行判断，分为如下五类：常数项、只包含指数、只包含系数、包含系数和指数、只包含系数为±1且省略。分类之后通过乘号的位置可以很方面的提取出系数和指数部分。</p>
+<p>我将每一项保存在一个指数和项映射的TreeMap中，将 TreeMap 的 key 值设置为指数有助于之后合并同类项。</p>
+<p>这一次作业相对来说比较基础，更多的是对容器的选择和 BigInteger 的使用，在程序的设计方面并没有很麻烦的地方。</p>
+<p>第一次作业的UML图如下所示，可见整个程序的类不多，在设计上也较多偏向于面向过程的结构。</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit1/hw1_uml.jpg" alt=""></p>
+<p>第一次作业代码行数：</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit1/hw1_statistic.jpg" alt=""></p>
+<p>第一次作业复杂度分析：</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit1/hw1_metrics.jpg" alt=""></p>
+<h3 id="第二次作业"><a href="#第二次作业" class="headerlink" title="第二次作业"></a>第二次作业</h3><p>第二次作业中，我仍然将程序分为了Expression - Term - Factor 三个层次，虽然每个类的名称有所改变，但是层次架构和第一次作业还是一致的。</p>
+<p>在 Factor 这一个层次中，我将 Factor 这个类设置为了抽象类，并且在此基础上产生了常数项、幂函数项、Sin函数、Cos函数四个子类，每个类都有不同的求导和转化成字符串的方法，当 Expression 和 Term 需要求导或者转化成字符串输出时，只要通过调用子类中的相关方法即可。</p>
+<p>跟第一次作业还略有不同的是保存Term的容器的 key 从单个的Index转变成了包含幂函数、Sin、Cos三个函数的Index的类，还是为了方便合并同类项。</p>
+<p>第二次作业UML图关于整体框架部分如下：</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit1/hw2_uml_1.jpg" alt=""></p>
+<p>第二次作业中关于 Factor 部分的类定义和创建，我尝试使用了工厂模式，相关的UML图如下：</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit1/hw2_uml_2.jpg" alt=""></p>
+<p>在 FactorFactory 这个类中，我尝试使用了正则表达式结合工厂模式对因子进行归一化处理。</p>
+<p>第二次作业代码行数如下：</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit1/hw2_statistic.jpg" alt=""></p>
+<p>第二次作业的Metrics图如下：</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit1/hw2_metrics_1.jpg" alt=""></p>
+<p>由于第二次作业中的类和方法比较多，可以简单地看下类的复杂度：</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit1/hw2_metrics_2.jpg" alt=""></p>
+<h3 id="第三次作业"><a href="#第三次作业" class="headerlink" title="第三次作业"></a>第三次作业</h3><p>第三次作业是本单元中最难的一关，主要难度在于嵌套等规则的加入，使得原来的求导方法以及分割方法在这一次作业中全部不适用了。</p>
+<p>第三次作业整体框架的UML图如下：</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit1/hw3_uml_1.jpg" alt=""></p>
+<p>Factor 相关类的具体构建如下UML图：</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit1/hw3_uml_2.jpg" alt=""></p>
+<p>第三次作业代码行数如下：</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit1/hw3_statistic.jpg" alt=""></p>
+<p>与前两次不同，在第三次作业中，新加入了关于运算规则的 Factor 类，他们都继承自 ExpressionFactor 类下，分别有Add、Multiply、Nest三个子类，并且每个都有对应的求导方法，便于对表达式的处理。</p>
+<p>第三次作业的Metrics图如下：</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit1/hw3_metrics_1.jpg" alt=""></p>
+<p>由于第三次作业中类和方法过多，对于类的复杂度分析可以更直观地体现其中的关系：</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit1/hw3_metrics_2.jpg" alt=""></p>
+<p>我们可以发现，由于SinFactor、CosFactor、PowerFactor由于在嵌套以及纯因子中使用十分频繁，导致该类复杂度开始飘红。</p>
+<h2 id="二、分析自己程序的bug"><a href="#二、分析自己程序的bug" class="headerlink" title="二、分析自己程序的bug"></a>二、分析自己程序的bug</h2><p>在第一次作业中由于程序相对而言较为简单，所以在公测和互测中都没有发现bug。</p>
+<p>第二次作业中，我的主要问题在于<strong>空格的处理</strong>，尤其是 WF 相关要求的加入，不能像第一次作业那样简单地删除所有的空格并且对连续出现的符号进行合并，这也导致了我的程序在判断一些非法空格时考虑得不够周密，导致出现了一些bug。</p>
+<p>第三次作业中，我的主要问题在于<strong>符号的处理</strong>，由于第三次作业加入了嵌套括号等内容，所以在符号处理上会变得更加复杂，比如括号外符号和因子前的符号的合并。</p>
+<h2 id="三、分析自己发现别人程序bug所采用的策略"><a href="#三、分析自己发现别人程序bug所采用的策略" class="headerlink" title="三、分析自己发现别人程序bug所采用的策略"></a>三、分析自己发现别人程序bug所采用的策略</h2><p>测试主要分为手动测试和自动测试两部分。</p>
+<p>手动测试也分为黑箱测试和白箱测试两种。黑箱测试是在还没看过代码的情况下，对一些常见出错以及一些边界情况进行检测，比如空字符串等情况。然后是白箱测试，就是阅读同学代码后有针对性地进行测试。</p>
+<p>除了手动测试之外，自动测试无疑是效率更高的测试方法。利用Python的自动化正则表达式生成器，可以进行大规模的测试。虽然自动化测试在覆盖度上并不能做到很广，测试数据的针对性也不是很高。但是在自动化测试的大规模数据的测试下，程序的正确性还是有一定保证的。</p>
+<h2 id="四、应用对象创建模式来重构"><a href="#四、应用对象创建模式来重构" class="headerlink" title="四、应用对象创建模式来重构"></a>四、应用对象创建模式来重构</h2><p>从第二次作业开始，我开始使用工厂模式的创建模式。</p>
+<p>在我的设计中，我希望利用表达式构建出一棵表达式树，其中规则相关的 Factor 作为分支节点而前两次作业中就有的函数 Factor 则作为叶节点。</p>
+<p>现在想来，在设计的时候应该把工厂也分成多个子工厂更加方便，在我第三次作业中使用的还是单一工厂模式，所以 FactorFactory 身兼多任，就难免出现内部复杂度过高的问题，这也不方便后续的优化和测试。</p>
+<h2 id="五、对比和心得体会"><a href="#五、对比和心得体会" class="headerlink" title="五、对比和心得体会"></a>五、对比和心得体会</h2><p>第一单元的学习已经接近尾声，从第一次作业中最基础的系数和指数，到第三次作业中的各种复杂的嵌套，从一开始披着面向对象外皮的面向过程程序，到越来越有层次化的组织架构，慢慢从面向过程步入了面向对象的殿堂。</p>
+<p>跟优秀的展示代码对比后，虽然我的思路大体一致，但是在一些细节设计上还是有一定的差距，比如因子的 Clone，字符串的预处理，以及类的划分和代码的组织方式。</p>
+<p>回顾这个单元的学习，我觉得我最大的问题还是对代码测试的积极性不足。太过于依赖中测数据进行debug，有点为了完成任务才debug，没有那种为了自己的代码臻于完美而不断优化的积极性。这也导致了我在第二次和第三次作业的互测中，都被找出了不止一处错误。关于测试，我还要在自己的代码中注重模块化测试的方法。而不是只有对程序的整体性测试。</p>
+<p>除了要提高测试的积极性之外，在之后的学习中我还要注意积累Java自带常用类的相关使用方法。</p>
+<p>此外，我还要多阅读他人优秀的代码，从而学习更加优秀的构造组织方法以丰富自己的思路。</p>
+
+      
+    </div>
+
+
+		<!个人修改>
+		<div>
+		
+		</div>	  
+
+    
+    
+      
+	  <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://tongtao.me/2020/01/14/%E5%8D%9A%E5%AE%A2%E7%BB%B4%E6%8A%A4%E5%A4%87%E5%BF%98%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1649,7 +1980,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1698,12 +2029,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">30k</span>
+    <span title="站点总字数">36k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">27 分钟</span>
+    <span title="站点阅读时长">33 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

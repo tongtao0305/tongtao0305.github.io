@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://tongtao.me').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="这个单元中，我们主要通过电梯调度相关的程序学习了多线程以及一些常见的设计模式。 一、总结分析设计策略第一次作业 本次作业，需要完成的任务为单部多线程可捎带电梯的模拟。                                        ——第一次作业指导书  第一次作业的难度并不大，主要是要初步掌握 Java 多线程程序的编写方法，尤其是保证多线程协作时的线程安全。为了达到这个目标，我们">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面向对象第二单元总结博客">
+<meta property="og:url" content="http://tongtao.me/2020/04/18/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%BA%8C%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:site_name" content="童涛的个人博客">
+<meta property="og:description" content="这个单元中，我们主要通过电梯调度相关的程序学习了多线程以及一些常见的设计模式。 一、总结分析设计策略第一次作业 本次作业，需要完成的任务为单部多线程可捎带电梯的模拟。                                        ——第一次作业指导书  第一次作业的难度并不大，主要是要初步掌握 Java 多线程程序的编写方法，尤其是保证多线程协作时的线程安全。为了达到这个目标，我们">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw5_uml.jpg">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw5_statistic.jpg">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw6_uml.jpg">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw6_statistic.jpg">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw7_uml_1.jpg">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw7_statistic_1.jpg">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw7_uml_2.jpg">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw7_statistic_2.jpg">
+<meta property="article:published_time" content="2020-04-18T08:54:35.000Z">
+<meta property="article:modified_time" content="2020-05-23T16:07:07.334Z">
+<meta property="article:author" content="童涛">
+<meta property="article:tag" content="面向对象">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw5_uml.jpg">
+
+<link rel="canonical" href="http://tongtao.me/2020/04/18/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%BA%8C%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>面向对象第二单元总结博客 | 童涛的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	
+	<!这我天添加的fork me on github>
+	<a href="https://github.com/tongtao0305" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+	
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">童涛的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我们的征途是星辰大海！</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://tongtao.me/2020/04/18/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%BA%8C%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="童涛">
+      <meta itemprop="description" content="现就读于北航计算机学院本科">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="童涛的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          面向对象第二单元总结博客
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-18 16:54:35" itemprop="dateCreated datePublished" datetime="2020-04-18T16:54:35+08:00">2020-04-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-24 00:07:07" itemprop="dateModified" datetime="2020-05-24T00:07:07+08:00">2020-05-24</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/18/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%BA%8C%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%BA%8C%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+	
+      
+        <p>这个单元中，我们主要通过电梯调度相关的程序学习了多线程以及一些常见的设计模式。</p>
+<h2 id="一、总结分析设计策略"><a href="#一、总结分析设计策略" class="headerlink" title="一、总结分析设计策略"></a>一、总结分析设计策略</h2><h3 id="第一次作业"><a href="#第一次作业" class="headerlink" title="第一次作业"></a>第一次作业</h3><blockquote>
+<p>本次作业，需要完成的任务为<strong>单部多线程可捎带电梯</strong>的模拟。                                        ——第一次作业指导书</p>
+</blockquote>
+<p>第一次作业的难度并不大，主要是要初步掌握 Java 多线程程序的编写方法，尤其是保证多线程协作时的线程安全。为了达到这个目标，我们需要对相关方法或者成员变量进行加锁，我在这次作业中选择的是 synchronized 将 PassengerQueue 类中的 addPassenger 和 subPassenger 方法进行加锁。从而不管是输入线程向缓冲队列添加乘客请求还是电梯线程从缓冲队列获取请求，都不会产生数据冲突，尽可能保证线程安全。</p>
+<p>我在这次作业中的设计模式，主要是参考<strong>生产者/消费者</strong>模式。采用了输入线程和电梯线程双线程的方法，输入线程主动添加乘客请求，电梯线程当电梯内为空即没有主请求的时候主动向缓冲队列获取请求。而缓冲队列相对而言只是承担了维护缓冲队列，也就是正在电梯外等待的乘客请求的容器。</p>
+<p>在这次作业的过程中，相较之下，主要的困难在于初步掌握 Java 多线程的编写方法以及调试方法。</p>
+<h3 id="第二次作业"><a href="#第二次作业" class="headerlink" title="第二次作业"></a>第二次作业</h3><blockquote>
+<p>本次作业，需要完成的任务为<strong>多部多线程可捎带调度电梯</strong>的模拟。                                ——第二次作业指导书</p>
+</blockquote>
+<p>第二次作业相较于第一次作业增加了在程序开始时输入电梯数量的要求，同时对电梯中乘客数量也做了限制。随着电梯数量的增加，多部电梯协同调度算法也开始重要起来。</p>
+<p>我在第二次作业的主要架构上，跟第一次作业没有大的变动，主要是在生产者/消费者模型的基础上，参考 <strong>Worker Thread 模式</strong>在细节上进行了一些修改。在第一次作业中，我的电梯进程是由 MainClass 直接产生并启动的，在这次作业中，由于电梯初始数量不确定，将这些任务都交给 MainClass 代码就不够有层次化了，也不符合主类尽可能简洁的要求。所以，我把这一个任务交给了 Channel，在 Channel 构建方法中根据电梯线程数量进行初始化，建立了 elevatorPool 对电梯进程进行统一管理，然后新建一个独立的方法来启动电梯。这样做，在一定程度上降低了类之间耦合性。</p>
+<h3 id="第三次作业"><a href="#第三次作业" class="headerlink" title="第三次作业"></a>第三次作业</h3><blockquote>
+<p>本次作业，需要完成的任务为<strong>多部多线程可捎带调度电梯</strong>的模拟。                                ——第三次作业指导书</p>
+</blockquote>
+<p>虽然在指导书的概述中与第二次作业没有任何差别，但是实际上相对于第二次作业还是有很大的不同的。主要是在前两次作业的基础上，增加了<strong>电梯停靠楼层</strong>以及运行过程中添加电梯的要求。后一个条件其实并没有带来很大的变化，主要是电梯停靠楼层的加入进而产生了一些换乘的需求。这些换乘需要进行一些宏观调度，不能单纯的将一个乘客请求调度至某个电梯，因为其有可能还要再次搭乘电梯。</p>
+<p>第三次作业我用了两种架构来完成。</p>
+<h4 id="第一种架构"><a href="#第一种架构" class="headerlink" title="第一种架构"></a>第一种架构</h4><p>第一种架构是在我前两次作业的基础上迭代而来。主要是将 PersonRequest 包装成了 LiftRequest 类，在这个类中增加了对于是否需要换乘的判断，以及换乘的楼层、电梯等相关信息。将原来缓冲队列中的 PersonRequest 元素全部换成了 LiftRequest 元素，有助于换乘时进行判断。除此之外，大体上还是继承了之前的思路。</p>
+<h4 id="第二种架构"><a href="#第二种架构" class="headerlink" title="第二种架构"></a>第二种架构</h4><p>第二种架构是因为感觉原来的架构中的<strong>调度器担负的任务过多</strong>，不太符合面向对象的相关需求，对其进行拆分。</p>
+<p>我建立了两层的 Scheduler 类，分为宏观调度和微观调度，分别对应 MasterScheduler 和 SlaveScheduler，均继承自 AbstractScheduler 接口。前者从 InputHandler 中获取乘客请求和电梯请求，然后根据不同的电梯分别加入不同种类电梯的专属调度器。后者在相同种类的电梯进程间进行调度。</p>
+<p><strong>简单来讲，主调度器判断需要搭乘的电梯类型，从调度器选择在该电梯类型中选择具体的电梯。</strong></p>
+<p>不同于前两次作业，除了输入进程结束以及缓冲队列为空，调度器的结束还要加入换乘乘客全部乘上第二部电梯的要求。考虑以下情况：</p>
+<p>最后一名旅客需要换乘，在搭乘第一部电梯时，MasterScheduler 中的缓冲队列为空同时输入进程也已经关闭，但是之后还有这名乘客还需要再次加入主调度器判断需要搭乘的下一部电梯类型。</p>
+<p>所以，为了保证需要换乘的乘客请求都能圆满地到达目的地。我在主调度器中保存了需要换乘的乘客名单，将进程结束的判断条件在输入进程结束、缓冲队列对空的基础上加入了需要换成的乘客为空的条件。以此来避免电梯进程提前结束的情况。</p>
+<p>在第二种架构中，我还使用了 CopyOnWriteArrayList 来代替 ArrayList 以提高程序的线程安全性。</p>
+<h2 id="二、总结分析架构设计的可扩展性"><a href="#二、总结分析架构设计的可扩展性" class="headerlink" title="二、总结分析架构设计的可扩展性"></a>二、总结分析架构设计的可扩展性</h2><ul>
+<li><strong>从设计原则检查角度，检查自己的设计，并按照 SOLID 列出所存在的问题。</strong></li>
+</ul>
+<h4 id="SRP-单一责任原则"><a href="#SRP-单一责任原则" class="headerlink" title="SRP 单一责任原则"></a>SRP 单一责任原则</h4><p>由于前两次作业的调度并不是很复杂，所以我主要分为三个部分：输入线程读取请求、调度器保存缓冲队列并响应电梯进程的获取乘客的请求、电梯进程运送乘客当电梯为空时从调度器获取乘客请求。</p>
+<p>在第三次作业中由于调度器的任务越来越繁重，我在按照原来的架构实现相关需求之后，对调度器进行了拆分，分为了主调度器和从调度器。前者主要负责从输入进程读取乘客请求并判断乘客需要的电梯类型并传送至专属的从调度器；后者则是在电梯类型的基础上选择具体的电梯来运送乘客。这样做，较好地满足了 SRP 的原则。</p>
+<h4 id="OCP-开放封闭原则"><a href="#OCP-开放封闭原则" class="headerlink" title="OCP 开放封闭原则"></a>OCP 开放封闭原则</h4><p>这次的作业中我的电梯进程除了在后两次作业中根据电梯类型添加了运行速度、载客量等变量之外，主体的函数并没有产生较大的变化，较为符合 OCP 原则。我的调度器则是进行了多次重构，在第三次作业中由于任务过于繁重进行了拆分。由于在第一次作业中对之后可能涉及的要求考虑不是很全面，导致了一定的重构，这点还是需要进一步改善。</p>
+<h4 id="LSP-里氏替换原则"><a href="#LSP-里氏替换原则" class="headerlink" title="LSP 里氏替换原则"></a>LSP 里氏替换原则</h4><p>第三次作业的第二种架构中，我的主调度器和从调度器均继承自 AbstractScheduler 抽象类，也都实现了该类中的抽象方法，可以做到子类对父类的替换。</p>
+<h4 id="ISP-接口分离原则"><a href="#ISP-接口分离原则" class="headerlink" title="ISP 接口分离原则"></a>ISP 接口分离原则</h4><p>本次作业中未涉及接口。</p>
+<h4 id="DIP-依赖倒置原则"><a href="#DIP-依赖倒置原则" class="headerlink" title="DIP 依赖倒置原则"></a>DIP 依赖倒置原则</h4><p>依赖倒置原则要求程序尽量依赖于抽象接口，不依赖于具体实现。简单来说，就是要程序尽可能对抽象进行编程。在这一点上，我觉得我还有一定差距。由于这次程序并没有太多的继承层次，所以我的输入进程以及电梯都没有继承自抽象接口，如果后续不同种类的电梯内部的实现差异更大的话，可以新建一个电梯的抽象类。</p>
+<h2 id="三、基于度量来分析自己的程序结构"><a href="#三、基于度量来分析自己的程序结构" class="headerlink" title="三、基于度量来分析自己的程序结构"></a>三、基于度量来分析自己的程序结构</h2><ul>
+<li><strong>度量类的属性个数、方法个数、每个方法规模、每个方法的控制分支数目、类总代码规模</strong></li>
+<li><strong>计算经典的 OO 度量</strong></li>
+<li><strong>画出自己作业的类图，并自我点评优点和缺点，要结合类图做分析</strong></li>
+<li><strong>通过 UML 的协作图（sequence diagram）来展示线程之间的协作关系（别忘记主线程）</strong></li>
+</ul>
+<h3 id="第一次作业-1"><a href="#第一次作业-1" class="headerlink" title="第一次作业"></a>第一次作业</h3><p>以下是第一次作业的 UML 图。</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw5_uml.jpg" alt=""></p>
+<p>以下是第一次作业的代码数量。</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw5_statistic.jpg" alt=""></p>
+<p>以下是第一次作业的复杂度分析。（由于插件使用异常，等可以正常使用后再补充）</p>
+<h3 id="第二次作业-1"><a href="#第二次作业-1" class="headerlink" title="第二次作业"></a>第二次作业</h3><p>以下是第二次作业的 UML 图。</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw6_uml.jpg" alt=""></p>
+<p>以下是第二次作业的代码数量。</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw6_statistic.jpg" alt=""></p>
+<h3 id="第三次作业-1"><a href="#第三次作业-1" class="headerlink" title="第三次作业"></a>第三次作业</h3><h4 id="第一种架构-1"><a href="#第一种架构-1" class="headerlink" title="第一种架构"></a>第一种架构</h4><p>以下是第三次作业第一种架构的 UML 图和代码数量。</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw7_uml_1.jpg" alt=""></p>
+<p>以下是第三次作业第一种架构的代码数量。</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw7_statistic_1.jpg" alt=""></p>
+<h4 id="第二种架构-1"><a href="#第二种架构-1" class="headerlink" title="第二种架构"></a>第二种架构</h4><p>以下是第三次作业第二种架构的 UML 图和代码数量。</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw7_uml_2.jpg" alt=""></p>
+<p>以下是第三次作业第二种架构代码数量。</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit2/hw7_statistic_2.jpg" alt=""></p>
+<h2 id="四、分析自己程序的-bug"><a href="#四、分析自己程序的-bug" class="headerlink" title="四、分析自己程序的 bug"></a>四、分析自己程序的 bug</h2><ul>
+<li><strong>分析未通过的公测用例和被互测发现的bug：特征、问题所在的类和方法</strong></li>
+<li><strong>特别注意分析那些与线程安全相关的问题（特别要注意死锁的分析）</strong></li>
+</ul>
+<p>第一次作业时出现了一个严重的错误，就是我对 ALS 调度算法的理解出现了一定的偏差，同时由于中测中并没有对运行时间进行一定的要求，导致我没能发现我的理解错误，进而导致我的程序在强测中全部出现了超时的情况，最终没能进入互测。</p>
+<p>在第二次作业中，我的程序主要出现了部分时候第一个乘客请求会被忽略的问题。在 debug 的时候发现，这是有同学在评论区已经分享过的错误，主要是由两个 Scanner 造成的。这也提醒了我平时要多关注评论区的相关分享。</p>
+<p>在第三次作业中，我的主要问题是部分时候在程序运行结束后有电梯进程没有结束的问题。</p>
+<h2 id="五、分析自己发现别人程序-bug-所采用的策略"><a href="#五、分析自己发现别人程序-bug-所采用的策略" class="headerlink" title="五、分析自己发现别人程序 bug 所采用的策略"></a>五、分析自己发现别人程序 bug 所采用的策略</h2><ul>
+<li><strong>列出自己所采取的测试策略及有效性</strong></li>
+<li><strong>分析自己采用了什么策略来发现线程安全相关的问题</strong></li>
+<li><strong>分析本单元的测试策略与第一单元测试策略的差异之处</strong></li>
+</ul>
+<p>本单元的测试我还是采用手动结合自动化测试的方法。因为本单元的作业不像上一个单元有很多的特殊情况，而更加注重程序的性能。而在正确性方面，只要能解决好线程安全的问题，经过一定的正确性测试，就不会有太大的问题。</p>
+<p>在本单元作业中，我会先测试上一次作业的强测数据以及自己手动的测试数据进行一定的正确性测试，然后结合结束输入的时间来进行一定的线程安全的测试，主要是看输入结束后程序能否在正确地运送完所有乘客后关闭电梯进程。本单元的测试相对来说主要是线程安全的问题，我认为只要程序的线程调度较为科学，应该可以避免大部分的线程安全问题。</p>
+<h2 id="六、心得体会"><a href="#六、心得体会" class="headerlink" title="六、心得体会"></a>六、心得体会</h2><ul>
+<li><strong>从线程安全和设计原则两个方面来梳理自己在本单元三次作业中获得的心得体会。</strong></li>
+</ul>
+<p>在这一单元的学习中，我接触学习了很多关于多线程的设计模式。</p>
+<ul>
+<li>生产者 - 消费者 模式</li>
+<li>Worker - Thread 模式</li>
+</ul>
+<p>这两个是我们在理论课和实验课上主要学习的两种常见的设计模式。</p>
+<p>在课外，我还阅读了《图解 Java 多线程设计模式》一书，并通过网络上的相关资料，了解了更多的多线程设计模式。</p>
+<p>比如在生成输入进程的时候，我尝试使用了单例模式的双检锁校验，能在安全的前提下保持较高的性能。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> InputHandler <span class="title">getInputHandler</span><span class="params">(Scheduler scheduler)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (inputThread == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (InputHandler<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (inputThread == <span class="keyword">null</span>) &#123;</span><br><span class="line">                inputThread = <span class="keyword">new</span> InputHandler(scheduler);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> inputThread;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个单元的学习，是我第一次接触多线程编程，在调试多线程时难以复现的 bug 以及莫名其妙的死锁都令人印象深刻。我希望我能在课下学习更多的多线程编程的设计模式，在以后的学习生活中，更加科学准确且高性能地应用多线程的相关知识。</p>
+
+    </div>
+
+
+		<!个人修改>
+		<div>
+		
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:22px;">-------------本文到此结束  <i class="fa fa-paw"></i>  感谢您的阅读-----------</div>
+    
+</div>
+		
+		</div>	  
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag"># 面向对象</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/20/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%B8%80%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2/" rel="prev" title="面向对象第一单元总结博客">
+      <i class="fa fa-chevron-left"></i> 面向对象第一单元总结博客
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/23/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%B8%89%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2/" rel="next" title="面向对象第三单元总结博客">
+      面向对象第三单元总结博客 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、总结分析设计策略"><span class="nav-number">1.</span> <span class="nav-text">一、总结分析设计策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一次作业"><span class="nav-number">1.1.</span> <span class="nav-text">第一次作业</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二次作业"><span class="nav-number">1.2.</span> <span class="nav-text">第二次作业</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三次作业"><span class="nav-number">1.3.</span> <span class="nav-text">第三次作业</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一种架构"><span class="nav-number">1.3.1.</span> <span class="nav-text">第一种架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二种架构"><span class="nav-number">1.3.2.</span> <span class="nav-text">第二种架构</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、总结分析架构设计的可扩展性"><span class="nav-number">2.</span> <span class="nav-text">二、总结分析架构设计的可扩展性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SRP-单一责任原则"><span class="nav-number">2.0.1.</span> <span class="nav-text">SRP 单一责任原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OCP-开放封闭原则"><span class="nav-number">2.0.2.</span> <span class="nav-text">OCP 开放封闭原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LSP-里氏替换原则"><span class="nav-number">2.0.3.</span> <span class="nav-text">LSP 里氏替换原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ISP-接口分离原则"><span class="nav-number">2.0.4.</span> <span class="nav-text">ISP 接口分离原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DIP-依赖倒置原则"><span class="nav-number">2.0.5.</span> <span class="nav-text">DIP 依赖倒置原则</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、基于度量来分析自己的程序结构"><span class="nav-number">3.</span> <span class="nav-text">三、基于度量来分析自己的程序结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一次作业-1"><span class="nav-number">3.1.</span> <span class="nav-text">第一次作业</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二次作业-1"><span class="nav-number">3.2.</span> <span class="nav-text">第二次作业</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三次作业-1"><span class="nav-number">3.3.</span> <span class="nav-text">第三次作业</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一种架构-1"><span class="nav-number">3.3.1.</span> <span class="nav-text">第一种架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二种架构-1"><span class="nav-number">3.3.2.</span> <span class="nav-text">第二种架构</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、分析自己程序的-bug"><span class="nav-number">4.</span> <span class="nav-text">四、分析自己程序的 bug</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、分析自己发现别人程序-bug-所采用的策略"><span class="nav-number">5.</span> <span class="nav-text">五、分析自己发现别人程序 bug 所采用的策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、心得体会"><span class="nav-number">6.</span> <span class="nav-text">六、心得体会</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="童涛"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">童涛</p>
+  <div class="site-description" itemprop="description">现就读于北航计算机学院本科</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tongtao0305" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;tongtao0305" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:605151707@qq.com" title="E-Mail → mailto:605151707@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">童涛</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">36k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">33 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: '9SFvgtyhPQAjEFHmyLX4Vcf8-gzGzoHsz',
+      appKey: 'quJUTNI2bSwyV2hir59PSQ4G',
+      placeholder: "欢迎文明留言评论~",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: false,
+      lang: '' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
