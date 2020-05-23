@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://tongtao.me').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="操作系统总结整理第一章引论本系列博客是源于2018级北航计算机学院的操作系统理论课程的课堂笔记、课堂练习及课后笔记整理而来。相关的参考资料绝大多数来自于北航计算机学院操作系统课程组，同时也参考了机械工业出版社出版的《现代操作系统（中文第四版）》。 由于本博客是本系列博客的开篇，故于此简单介绍一下北航计算机学院操作系统理论课程的目标，再进行第一章内容的总结。 操作系统课程目标 掌握操作系统的基本原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统总结整理第一章引论">
+<meta property="og:url" content="http://tongtao.me/2020/05/23/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%80%BB%E7%BB%93%E6%95%B4%E7%90%86%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BC%95%E8%AE%BA/index.html">
+<meta property="og:site_name" content="童涛的个人博客">
+<meta property="og:description" content="操作系统总结整理第一章引论本系列博客是源于2018级北航计算机学院的操作系统理论课程的课堂笔记、课堂练习及课后笔记整理而来。相关的参考资料绝大多数来自于北航计算机学院操作系统课程组，同时也参考了机械工业出版社出版的《现代操作系统（中文第四版）》。 由于本博客是本系列博客的开篇，故于此简单介绍一下北航计算机学院操作系统理论课程的目标，再进行第一章内容的总结。 操作系统课程目标 掌握操作系统的基本原理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%B1%82%E6%AC%A1.png">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A32.png">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%86%E5%8F%B2.png">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-%E5%86%AF%E8%AF%BA%E4%BE%9D%E6%9B%BC%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-%E5%93%88%E4%BD%9B%E7%BB%93%E6%9E%84.jpg">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-%E5%BC%82%E5%B8%B8%E5%9B%BE%E8%A7%A3.png">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-%E5%BC%82%E5%B8%B8.jpg">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-%E5%BE%AE%E5%86%85%E6%A0%B8.jpg">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-UNIX.png">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-Linux.png">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-DOS.png">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-windows%E7%AE%80%E5%8C%96.png">
+<meta property="article:published_time" content="2020-05-23T15:23:35.000Z">
+<meta property="article:modified_time" content="2020-05-23T15:23:35.340Z">
+<meta property="article:author" content="童涛">
+<meta property="article:tag" content="操作系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%B1%82%E6%AC%A1.png">
+
+<link rel="canonical" href="http://tongtao.me/2020/05/23/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%80%BB%E7%BB%93%E6%95%B4%E7%90%86%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BC%95%E8%AE%BA/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>操作系统总结整理第一章引论 | 童涛的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	
+	<!这我天添加的fork me on github>
+	<a href="https://github.com/tongtao0305" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+	
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">童涛的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我们的征途是星辰大海！</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://tongtao.me/2020/05/23/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%80%BB%E7%BB%93%E6%95%B4%E7%90%86%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BC%95%E8%AE%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="童涛">
+      <meta itemprop="description" content="现就读于北航计算机学院本科">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="童涛的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          操作系统总结整理第一章引论
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-23 23:23:35" itemprop="dateCreated datePublished" datetime="2020-05-23T23:23:35+08:00">2020-05-23</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/23/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%80%BB%E7%BB%93%E6%95%B4%E7%90%86%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BC%95%E8%AE%BA/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/23/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%80%BB%E7%BB%93%E6%95%B4%E7%90%86%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BC%95%E8%AE%BA/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+	
+      
+        <h1 id="操作系统总结整理第一章引论"><a href="#操作系统总结整理第一章引论" class="headerlink" title="操作系统总结整理第一章引论"></a>操作系统总结整理第一章引论</h1><p>本系列博客是源于2018级北航计算机学院的操作系统理论课程的课堂笔记、课堂练习及课后笔记整理而来。相关的参考资料绝大多数来自于北航计算机学院操作系统课程组，同时也参考了机械工业出版社出版的《现代操作系统（中文第四版）》。</p>
+<p>由于本博客是本系列博客的开篇，故于此简单介绍一下北航计算机学院操作系统理论课程的目标，再进行第一章内容的总结。</p>
+<h2 id="操作系统课程目标"><a href="#操作系统课程目标" class="headerlink" title="操作系统课程目标"></a>操作系统课程目标</h2><ul>
+<li>掌握操作系统的基本原理<ul>
+<li>进程管理</li>
+<li>存储管理</li>
+<li>设备管理</li>
+<li>文件系统</li>
+</ul>
+</li>
+<li>对操作系统的基本概念、基本结构及运行环境有深入的认识；<ul>
+<li>具有分析操作系统的能力</li>
+</ul>
+</li>
+<li>系统级编程能力的提高<ul>
+<li>系统调用的使用</li>
+</ul>
+</li>
+<li>深入到操作系统内部，理解并掌握操作系统的基本原理、设计方法和实现技术<ul>
+<li>操作系统设计、并发程序的设计方法</li>
+</ul>
+</li>
+<li>思维方式的学习：权衡（Trade Off）、抽象</li>
+<li>了解操作系统的演化过程、发展研究动向、新技术以及新思想</li>
+</ul>
+<h2 id="本章复习重点"><a href="#本章复习重点" class="headerlink" title="本章复习重点"></a>本章复习重点</h2><ul>
+<li>操作系统的发展历史<ul>
+<li>批处理、分时</li>
+<li>单道程序、多道程序</li>
+<li>实时、网络、分布式</li>
+</ul>
+</li>
+<li>冯诺依曼体系结构：存储程序式<ul>
+<li>集中顺序过程控制</li>
+</ul>
+</li>
+<li>操作系统的主要功能<ul>
+<li>进程管理</li>
+<li>存储管理</li>
+<li>设备管理</li>
+<li>文件系统</li>
+</ul>
+</li>
+<li>现代操作系统的基本特征<ul>
+<li>并发执行</li>
+<li>资源共享</li>
+<li>虚拟化管理</li>
+<li>异步性</li>
+</ul>
+</li>
+<li>操作系统的工作模式<ul>
+<li>内核态/管态</li>
+<li>用户态/目态</li>
+</ul>
+</li>
+<li>几个术语<ul>
+<li>特权指令/保护指令</li>
+<li>异常：中断、陷入（包括系统调用）</li>
+</ul>
+</li>
+<li>分析操作系统的几种观点<ul>
+<li>用户观点：操作系统为用户提供了哪些功能可以使用</li>
+<li>资源管理：回答了整个操作系统是由哪几部分组成的</li>
+<li>进程观点：指明了这些资源管理程序在什么时候开始起作用，以及它们在执行过程中是如何相互联系的</li>
+<li>模块分层设计：从操作系统构建的角度，考虑操作系统的结构</li>
+<li>抽象与权衡</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-1-什么是操作系统"><a href="#1-1-什么是操作系统" class="headerlink" title="1.1 什么是操作系统"></a>1.1 什么是操作系统</h2><h3 id="操作系统定义（非严格）"><a href="#操作系统定义（非严格）" class="headerlink" title="操作系统定义（非严格）"></a>操作系统定义（非严格）</h3><ul>
+<li>操作系统是一组<strong>管理计算机硬件资源的软件集合</strong>，它向计算机程序提供共性的服务。<ul>
+<li>提供一个计算机用户与计算机硬件系统之间的接口 ，使计算机系统<strong>更易于使用</strong>。（使用者）</li>
+<li>有效地控制和管理计算机系统中的各种硬件和软件资源，使之得到<strong>更有效的利用</strong>。（资源管理者）</li>
+<li>合理地组织计算机系统的工作流程，以<strong>改善系统性能</strong>（如响应时间、系统吞吐量）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="操作系统层次"><a href="#操作系统层次" class="headerlink" title="操作系统层次"></a>操作系统层次</h3><ul>
+<li>user</li>
+<li>system and application programs</li>
+<li>operating system</li>
+<li>computer hardware</li>
+</ul>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%B1%82%E6%AC%A1.png" alt="操作系统层次"></p>
+<h3 id="计算机体系结构中的接口"><a href="#计算机体系结构中的接口" class="headerlink" title="计算机体系结构中的接口"></a>计算机体系结构中的接口</h3><p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A32.png" alt="操作系统接口"></p>
+<ul>
+<li>自顶向下看操作系统，利用<strong>抽象</strong>来<strong>屏蔽复杂性</strong>。<ul>
+<li>创建抽象</li>
+<li>实现和管理抽象</li>
+</ul>
+</li>
+<li>自底向上看操作系统，利用<strong>资源的复用</strong>来实现<strong>时间维度</strong>和<strong>空间维度</strong>的共享。<ul>
+<li>支持多个用户、多个程序</li>
+<li>资源竞争</li>
+<li>资源的复用（共享）</li>
+</ul>
+</li>
+</ul>
+<h3 id="操作系统的设计目标"><a href="#操作系统的设计目标" class="headerlink" title="操作系统的设计目标"></a>操作系统的设计目标</h3><ul>
+<li><p>更多的人能方便地使用计算机（<strong>方便性</strong>）</p>
+<ul>
+<li>通过操作系统提供的各种命令来操作计算机极大方便了用户，使得计算机系统易学易用。</li>
+</ul>
+</li>
+<li><p>计算机系统的使用效率尽可能地高（<strong>有效性</strong>）</p>
+<ul>
+<li>提高<strong>系统资源的利用率</strong>。在未配置操作系统的计算机系统中，处理机和IO设备经常处于空闲状 态，系统资源利用率低下；</li>
+<li>提高<strong>系统的吞吐量</strong>。操作系统通过合理组织计算 机的工作流程，加速程序的运行，缩短程序的运 行周期以实现系统吞吐量的提高；</li>
+</ul>
+</li>
+</ul>
+<h3 id="操作系统的作用"><a href="#操作系统的作用" class="headerlink" title="操作系统的作用"></a>操作系统的作用</h3><ul>
+<li><p>用户与计算机硬件系统之间的<strong>接口</strong>（API/GUI）</p>
+</li>
+<li><p>即：OS处于用户与计算机硬件系统之间，用户通过OS来使用计算机系统。 </p>
+</li>
+<li><p>系统资源的管理者（处理机、存储器、I/O设备等）</p>
+<ul>
+<li><p><strong>处理机管理</strong>是用于分配和控制处理机</p>
+</li>
+<li><p><strong>存储器管理</strong>是负责内存的分配与回收</p>
+</li>
+<li><p><strong>I/O设备管理</strong>是负责I/O设备的分配（回收）与操纵</p>
+</li>
+<li><p><strong>文件管理</strong>是用于实现文件的存取、共享和保护 </p>
+</li>
+</ul>
+</li>
+<li><p>实现对计算机资源的<strong>抽象</strong>（OS是扩充机/虚拟机）</p>
+</li>
+</ul>
+<h2 id="1-2-操作系统简史"><a href="#1-2-操作系统简史" class="headerlink" title="1.2 操作系统简史"></a>1.2 操作系统简史</h2><h3 id="操作系统历史沿革"><a href="#操作系统历史沿革" class="headerlink" title="操作系统历史沿革"></a>操作系统历史沿革</h3><p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%86%E5%8F%B2.png" alt="操作系统历史"></p>
+<h3 id="冯诺依曼体系结构"><a href="#冯诺依曼体系结构" class="headerlink" title="冯诺依曼体系结构"></a>冯诺依曼体系结构</h3><p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-%E5%86%AF%E8%AF%BA%E4%BE%9D%E6%9B%BC%E7%BB%93%E6%9E%84.png" alt="冯诺依曼体系结构"></p>
+<ul>
+<li>存储程序式</li>
+<li>集中顺序过程控制</li>
+</ul>
+<h3 id="哈佛结构"><a href="#哈佛结构" class="headerlink" title="哈佛结构"></a>哈佛结构</h3><p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-%E5%93%88%E4%BD%9B%E7%BB%93%E6%9E%84.jpg" alt="哈佛结构"></p>
+<ul>
+<li>冯诺依曼体系结构瓶颈：指令和数据共同存储，数据及指令的访问彼此干扰，影响了系统的性能。</li>
+<li>Harvard architecture对此进行了改进，将指令存储与数据存储分离（或增加指令Cache，与数据Cache独立）。</li>
+</ul>
+<h3 id="操作系统简史"><a href="#操作系统简史" class="headerlink" title="操作系统简史"></a>操作系统简史</h3><ul>
+<li>1946~1955年，电子管</li>
+<li>1955~1965年，晶体管&amp;监控系统</li>
+<li>1965~1980年，集成电路&amp;多道程序设计</li>
+<li>1980~1990年，PC机&amp;微机操作系统</li>
+<li>1990至今，年分布式与嵌入式系统</li>
+</ul>
+<h3 id="1955-1965年晶体管-amp-监控系统"><a href="#1955-1965年晶体管-amp-监控系统" class="headerlink" title="1955~1965年晶体管&amp;监控系统"></a>1955~1965年晶体管&amp;监控系统</h3><ul>
+<li>IBM的1401（卫星机）和7094（主机）。</li>
+<li>FORTRAN语言出现（语言的历史70年代FORTRAN为主，80年代C语言为主，90年代C++为主，2000是JAVA，2010年？？）。</li>
+<li>操作系统的代表为FMS (the Fortran Monitor System)，批处理系统。</li>
+</ul>
+<h3 id="批处理操作系统"><a href="#批处理操作系统" class="headerlink" title="批处理操作系统"></a>批处理操作系统</h3><ul>
+<li><strong>批处理系统</strong>：加载在计算机上的一个系统软件，在它的控制下，计算机能够自动地、成批地处理一个或多个用户的作业（这作业包括程序、数据和命令）。它又分为两个阶段：<strong>联机批处理系统</strong>和<strong>脱机批处理系统</strong>。</li>
+<li>首先出现的是<strong>联机批处理系统</strong>，即<strong>作业的输入/输出由CPU来处理</strong>。<ul>
+<li>在主机与输入机之间增加一个存储设备——磁带，在运行于主机上的监督程序的自动控制下，计算机可自动完成：成批地把输入机上的用户作业读入磁带，依次把磁带上的用户作业读入主机内存并执行，然后把计算结果向输出机输出。完成了上一批作业后，监督程序又从输入机上输入另一批作业，保存在磁带上，并按上述步骤重复处理。</li>
+<li>优点：监督程序不停地处理各个作业，从而实现了作业到作业的自动转接，减少了作业建立时间和手工操作时间，有效克服了人机矛盾，提高了计算机的利用率。</li>
+<li>不足：在作业输入和结果输出时，主机的高速CPU仍处于空闲状态，即等待慢速的输入/输出设备完成工作：此时主机处于“忙等”状态。</li>
+</ul>
+</li>
+<li>为克服与缓解高速主机与慢速外设的矛盾，提高CPU的利用率，又引入了<strong>脱机批处理系统</strong>，即<strong>输入/输出脱离主机控制</strong>。<ul>
+<li>这种方式的显著特征是：增加一台不与主机直接相连而专门用于与输入/输出设备打交道的<strong>卫星机</strong>。其功能是：<ul>
+<li>从输入机上读取用户作业并放到输入磁带上。</li>
+<li>从输出磁带上读取执行结果并传给输出机。</li>
+</ul>
+</li>
+<li>优势：主机不直接与慢速的输入/输出设备打交道，而是与速度相对较快的磁带机发生关系，有效缓解了主机与设备的矛盾。主机与卫星机可并行工作，二者分工明确，可以发挥主机的高速计算能力。</li>
+<li>不足：每次主机内存中仅存放一道作业，每当它运行期间发出输入/输出（I/O）请求后，高速的CPU便处于等待低速的I/O完成状态，致使CPU空闲。 为进一步提升CPU的利用率，又引入了<strong>多道程序系统</strong>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1965-1980年-集成电路-amp-多道程序设计"><a href="#1965-1980年-集成电路-amp-多道程序设计" class="headerlink" title="1965-1980年 集成电路&amp;多道程序设计"></a>1965-1980年 集成电路&amp;多道程序设计</h3><ul>
+<li>OS/360开发失败，导致了软件工程的诞生，从另一个意义上说，它也有成功之处，改变了上一代操作系统的问题，提出了多道程序设计（进程）、向下兼容的思想。商业上成功。</li>
+<li>分时系统CTSS、MULTICS、UNIX。</li>
+</ul>
+<h3 id="多道程序设计"><a href="#多道程序设计" class="headerlink" title="多道程序设计"></a>多道程序设计</h3><ul>
+<li>所谓<strong>多道程序设计技术</strong>，就是指允许多个程序同时进入内存并运行。即同时把多个程序放入内存中（ 前提是内存放的下），并允许它们交替在CPU中运行，它们共享系统中的各种硬、软件资源。当一道程序因I/O请求而暂停运行时，CPU便立即转去运行另一道程序。</li>
+<li>多道程序设计技术不仅<strong>使CPU得到充分利用</strong>，同时也<strong>改善I/O设备和内存的利用率</strong>，从而提高了<strong>整个系统的资源利用率和系统吞吐量</strong>（即单位时间内处理作业（程序）的个数），最终提高了整个系统的效率。</li>
+<li>单处理机系统中多道程序运行时的特点：<ul>
+<li>多道：计算机内存中同时存放几道相互独立的程序；</li>
+<li><strong>宏观上并行</strong>：同时进入系统的几道程序都处于运行过程中，即它们先后开始了各自的运行，但都未运行完毕；</li>
+<li><strong>微观上串行</strong>：实际上，各道程序轮流地用CPU，并交替运行。 </li>
+</ul>
+</li>
+<li>多道程序系统的出现，标志着操作系统渐趋成熟的阶段，先后出现了作业调度管理、处理机管理、存 储器管理、外部设备管理、文件系统管理等功能。</li>
+<li>多道程序系统需要解决的问题<ul>
+<li>在一个连续的内存空间，同时驻留多道程序</li>
+<li>处理机的争夺</li>
+<li>I/O设备的分配</li>
+<li>有效的组织不同程序的运行</li>
+<li>系统对各种存储介质的管理</li>
+</ul>
+</li>
+</ul>
+<h3 id="多道批处理系统"><a href="#多道批处理系统" class="headerlink" title="多道批处理系统"></a>多道批处理系统</h3><ul>
+<li>20世纪60年代中期，在前述的<strong>批处理系统</strong>中，引入<strong>多道程序设计</strong>技术后形成<strong>多道批处理系统（简称批处理系统）</strong>，具有两个特点：<ul>
+<li><strong>多道</strong>：<strong>系统内可同时容纳多个作业</strong>。这些作业放在外存中，组成一个后备队列，系统按一定的调度原则每次从后备作业队列中选取一个或多个作业进入内存运行，运行作业结束、退出运行和后备作业进入运行均由系统自动实现，从而在系统中形成一个自动转接的、连续的作业流。</li>
+<li><strong>成批</strong>：在系统运行过程中，<strong>不允许用户与其作业发生交互作用</strong>，即：作业一旦进入系统，用户就不能直接干预其作业的运行。</li>
+</ul>
+</li>
+<li>优点：<ul>
+<li>系统吞吐量大</li>
+<li>资源利用率高</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>平均周转时间长</li>
+<li>不能提供交互作用能力</li>
+</ul>
+</li>
+</ul>
+<h3 id="分时操作系统"><a href="#分时操作系统" class="headerlink" title="分时操作系统"></a>分时操作系统</h3><ul>
+<li><p>What 分时系统</p>
+<ul>
+<li>将CPU处理时间分割为多个<strong>时间片</strong>，将时间片分给不同程 序，达到多个程序“<strong>同时</strong>”运行的效果。</li>
+</ul>
+</li>
+<li><p>Why 分时系统</p>
+<ul>
+<li>批处理系统一次执行一个程序，I/O过程CPU<strong>空转</strong>。</li>
+<li>为进一步提高CPU利用率，支持<strong>多用户、多进程</strong>。</li>
+</ul>
+</li>
+<li><p>出现时期(1957至今) </p>
+<ul>
+<li>分时系统的概念最早由IBM的Bob Bemer在1957年提出</li>
+<li>第一款分时系统CTSS(Compatible)在1961发布</li>
+</ul>
+</li>
+<li><p>两种典型的分时系统</p>
+<ul>
+<li>Multics/Unix (1968/1970) </li>
+<li>IBM VM 360/370 (1966/1972)</li>
+</ul>
+</li>
+<li><p>分时的含义：分时是指多个用户分享使用同一台计算机，多个程序分时共享硬件和软件资源。</p>
+<ul>
+<li>多个用户分时</li>
+<li>前台和后台程序(foreground &amp; background)分时</li>
+<li>时间片(time slice)</li>
+</ul>
+</li>
+<li><p><strong>分时技术：把处理机的运行时间分成很短的时间片， 按时间片轮流把处理机分配给各联机作业使用。</strong></p>
+</li>
+<li><p>由于CPU速度不断提高和采用分时技术，一台计算机可同时连接多个用户终端，而每个用户可在自己的终端上联机使用计算机，好象自己独占机器一样。</p>
+</li>
+<li><p>分时技术特点：</p>
+<ul>
+<li><strong>多路性</strong>：若干个用户同时使用一台计算机。微观上看是各用户轮流使用计算机；宏观上看是各用户并行工作。</li>
+<li><strong>交互性</strong>：用户可根据系统对请求的响应结果，进一步向系统提出新的请求。这种能使用户与系统进行人机对话的工作方式，明显地有别于批处理系统，因而，<strong>分时系统又被称为交互式系统</strong>。</li>
+<li><strong>独立性</strong>：用户之间可以相互独立，互不干扰。系统保证各用户程序运行的完整性，不会发生相互混淆或破坏现象。</li>
+<li><strong>及时性</strong>：系统可对用户的输入及时作出响应。分时系统性能的主要指标之一是响应时间，它是指，从终端发出命令到系统予以应答所需的时间。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1980-1990年-PC机-amp-微机操作系统"><a href="#1980-1990年-PC机-amp-微机操作系统" class="headerlink" title="1980-1990年 PC机&amp;微机操作系统"></a>1980-1990年 PC机&amp;微机操作系统</h3><ul>
+<li>PC机</li>
+<li>MSDOS、WINDOWS 95、WINDOWS NT、WINDOWS 2000</li>
+<li>类UNIX(Linux, Freebsd等)</li>
+</ul>
+<h3 id="1990至今-分布式与嵌入式系统"><a href="#1990至今-分布式与嵌入式系统" class="headerlink" title="1990至今 分布式与嵌入式系统"></a>1990至今 分布式与嵌入式系统</h3><ul>
+<li>Cluster of Workstation, Network of Workstation, Grid, Cloud</li>
+<li>实时操作系统：Psos, VRTX, RTLinux, VxWorks</li>
+</ul>
+<h3 id="操作系统的网格化"><a href="#操作系统的网格化" class="headerlink" title="操作系统的网格化"></a>操作系统的网格化</h3><ul>
+<li><p>操作系统的网格化分为两类：</p>
+<ul>
+<li>Network Operating System <strong>网络操作系统</strong></li>
+</ul>
+</li>
+<li><p>在传统单机OS上加单独软件层，主要提供<strong>联网功能和资源的远程访问</strong>，实现多机互联。</p>
+<ul>
+<li>Distributed Operating System <strong>分布式操作系统</strong></li>
+</ul>
+</li>
+<li><p>多台机器统一管理形成单一系统，相比网络操作系统，<strong>对用户和应用高度透明</strong>。</p>
+</li>
+<li><p>分布式操作系统的透明性体现在：</p>
+</li>
+<li><p><strong>数据透明</strong>：用户无需了解文件存储位置</p>
+<ul>
+<li><strong>执行透明</strong>：用户无需关心程序运行位置</li>
+</ul>
+</li>
+<li><p><strong>保护透明</strong>：统一的身份管理和安全机制</p>
+</li>
+</ul>
+<h3 id="分布式系统"><a href="#分布式系统" class="headerlink" title="分布式系统"></a>分布式系统</h3><ul>
+<li>分布式系统是一个<strong>一体化</strong>的系统，在整个系统中有一个全局的操作系统称为分布式操作系统。</li>
+<li>有网络作为底层支持<ul>
+<li>具有模块性</li>
+<li>并行性：<ul>
+<li>常规网络中的并行性仅仅意味着独立性</li>
+<li>而分布式系统中的并行性还意味着合作，原因在于：<ul>
+<li>分布式系统是一个物理上的松散耦合系统</li>
+<li>又是一个逻辑上的紧密耦合的系统</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>自治性</li>
+<li>通信性</li>
+</ul>
+</li>
+<li>分布式系统和计算机网络的区别<ul>
+<li>前者具有<strong>多机合作和健壮性</strong>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="实时系统"><a href="#实时系统" class="headerlink" title="实时系统"></a>实时系统</h3><ul>
+<li>嵌入式OS比桌上PC的OS相对简单，但由于各种嵌入式系统产品中包含各不相同的特殊需求，导致这类系统中 使用的OS不下几百种，例如Windows CE、Palm OS、 VxWorks、pSOS、QNX、PowerTV、OpenTV、JavaOS、 LynxOS、Nucleus等等都是。而且至今仍有一半的开发者使用自行开发的OS。</li>
+<li>实时系统特点<ul>
+<li>及时响应</li>
+<li>高可靠性和安全性</li>
+<li>系统的整体性强</li>
+<li>交互会话活动较弱</li>
+<li>专用系统</li>
+<li>种类：实时信息处理、实时控制</li>
+<li>网络即为操作系统：所有的功能分布于整个网络</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-3-计算机硬件简介"><a href="#1-3-计算机硬件简介" class="headerlink" title="1.3 计算机硬件简介"></a>1.3 计算机硬件简介</h2><p>由于此部分内容在计算机组成课程中已经有所涉及，硬件与操作系统相关的部分也会在之后的相关章节具体讲解，故在此省略此部分内容。</p>
+<h2 id="1-4-操作系统的基本实现机制"><a href="#1-4-操作系统的基本实现机制" class="headerlink" title="1.4 操作系统的基本实现机制"></a>1.4 操作系统的基本实现机制</h2><h3 id="异常-exception-：陷阱-trap-和中断-interrupt"><a href="#异常-exception-：陷阱-trap-和中断-interrupt" class="headerlink" title="异常(exception)：陷阱(trap)和中断(interrupt)"></a>异常(exception)：陷阱(trap)和中断(interrupt)</h3><ul>
+<li>中断是<strong>异步异常</strong>，可能随时发生，与处理器正在执行的内容无关。中断主要由<strong>I/O设备、处理器时钟或定时器</strong>产生， 可以被启用或禁用。 （Asynchronous Exceptions）</li>
+<li>陷阱是<strong>同步异常</strong>，它是某一特定指令执行的结果。在相同条件下，异常可以重现。例如内存访问错误、调试指令以及被零除。 （Synchronous exceptions)</li>
+<li>系统调用也视作同步异常，或trap。</li>
+<li>软件和硬件都可以产生中断。</li>
+<li>陷阱(trap)帧：完整的线程描述表的子集，用于现场保护。</li>
+<li>陷阱处理程序处理少量事件，多数转交给其他的内核或执行体模块处理。</li>
+</ul>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-%E5%BC%82%E5%B8%B8%E5%9B%BE%E8%A7%A3.png" alt="异常图解"></p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-%E5%BC%82%E5%B8%B8.jpg" alt="异常"></p>
+<h2 id="1-5-操作系统的基本类型"><a href="#1-5-操作系统的基本类型" class="headerlink" title="1.5 操作系统的基本类型"></a>1.5 操作系统的基本类型</h2><h3 id="操作系统的基本类型"><a href="#操作系统的基本类型" class="headerlink" title="操作系统的基本类型"></a>操作系统的基本类型</h3><ul>
+<li>批处理系统</li>
+<li>分时系统</li>
+<li>实时系统</li>
+<li>混合型系统</li>
+</ul>
+<h2 id="1-6-操作系统的特征和功能"><a href="#1-6-操作系统的特征和功能" class="headerlink" title="1.6 操作系统的特征和功能"></a>1.6 操作系统的特征和功能</h2><h3 id="操作系统的特征"><a href="#操作系统的特征" class="headerlink" title="操作系统的特征"></a>操作系统的特征</h3><ul>
+<li>并发</li>
+<li>共享<ul>
+<li>互斥共享（打印机、变量）</li>
+<li>同时访问（宏观）</li>
+</ul>
+</li>
+<li>虚拟<ul>
+<li>多道程序中的CPU</li>
+<li>SPOOLING（外围设备同时联机操作）</li>
+<li>虚拟存储</li>
+</ul>
+</li>
+<li>异步性<ul>
+<li>由于资源等因素的限制，程序的执行通常都不可能“一气呵成”，而是以“停停走走”的方式运行。</li>
+</ul>
+</li>
+</ul>
+<h3 id="操作系统的功能"><a href="#操作系统的功能" class="headerlink" title="操作系统的功能"></a>操作系统的功能</h3><ul>
+<li>处理机管理</li>
+<li>存储器管理（内存）</li>
+<li>设备管理</li>
+<li>文件管理</li>
+<li>作业控制</li>
+</ul>
+<h3 id="处理机管理"><a href="#处理机管理" class="headerlink" title="处理机管理"></a>处理机管理</h3><ul>
+<li>进程（线程）控制</li>
+<li>进程（线程）同步</li>
+<li>进程通信</li>
+<li>进程（线程）调度</li>
+</ul>
+<h3 id="存储器管理（内存）"><a href="#存储器管理（内存）" class="headerlink" title="存储器管理（内存）"></a>存储器管理（内存）</h3><ul>
+<li>任务：<ul>
+<li>为多道程序的并发提供良好的环境</li>
+<li>便于用户使用存储器</li>
+<li>提高存储器利用率</li>
+<li>为尽量多的用户提供足够大的存储空间</li>
+</ul>
+</li>
+<li>功能：<ul>
+<li>内存分配：静态和动态分配</li>
+<li>内存保护</li>
+<li>地址影射</li>
+<li>内存扩充</li>
+</ul>
+</li>
+</ul>
+<h3 id="设备管理"><a href="#设备管理" class="headerlink" title="设备管理"></a>设备管理</h3><ul>
+<li>任务：<ul>
+<li>为用户程序分配I/O设备</li>
+<li>完成用户程序请求的I/O操作</li>
+<li>提高CPU和I/O设备的利用率：中断；通道</li>
+<li>改善人机界面</li>
+</ul>
+</li>
+<li>功能：<ul>
+<li>缓冲管理</li>
+<li>设备分配</li>
+<li>设备处理</li>
+<li>虚拟设备功能</li>
+</ul>
+</li>
+</ul>
+<h3 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h3><ul>
+<li>文件存储空间的管理</li>
+<li>目录管理</li>
+<li>文件读、写管理</li>
+<li>文件保护</li>
+<li>向用户提供接口</li>
+</ul>
+<h3 id="作业控制"><a href="#作业控制" class="headerlink" title="作业控制"></a>作业控制</h3><ul>
+<li>作业调度；</li>
+<li>作业控制<ul>
+<li>批量型作业</li>
+<li>终端型作业</li>
+</ul>
+</li>
+</ul>
+<h3 id="操作系统应解决的基本问题"><a href="#操作系统应解决的基本问题" class="headerlink" title="操作系统应解决的基本问题"></a>操作系统应解决的基本问题</h3><ul>
+<li>提供解决各种<strong>冲突（资源竞争引起）</strong>的策略<ul>
+<li>处理机调度、进程调度、内存分配、设备分配等 </li>
+</ul>
+</li>
+<li>协调<strong>并发活动</strong>的关系（提供流程控制和避免运行结果不确定性）<ul>
+<li>进程之间的通信，同步与互斥 </li>
+</ul>
+</li>
+<li>保证<strong>数据的一致性</strong><ul>
+<li>读写数据时，数据结构中的内容是否真实地记录了数据的实际情况</li>
+<li>在分布式处理时的共享数据的不同副本是否一致</li>
+</ul>
+</li>
+<li>实现<strong>数据的存取控制</strong><ul>
+<li>共享程度、隐私程度、安全程度的控制</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-7-操作系统结构"><a href="#1-7-操作系统结构" class="headerlink" title="1.7 操作系统结构"></a>1.7 操作系统结构</h2><h3 id="操作系统结构"><a href="#操作系统结构" class="headerlink" title="操作系统结构"></a>操作系统结构</h3><ul>
+<li>模块接口</li>
+<li>有序分层法</li>
+<li>虚拟机</li>
+<li>微内核结构</li>
+<li>机制与策略分开</li>
+</ul>
+<h3 id="模块接口"><a href="#模块接口" class="headerlink" title="模块接口"></a>模块接口</h3><ul>
+<li>内聚性</li>
+<li>耦合性</li>
+<li>优点：加速了操作系统的研制过程、增加了操作系统的灵活性、便于修改和维护。</li>
+<li>缺点：接口定义困难、无序性。</li>
+</ul>
+<blockquote>
+<p>高内聚，低耦合。</p>
+</blockquote>
+<h3 id="有序分层法"><a href="#有序分层法" class="headerlink" title="有序分层法"></a>有序分层法</h3><ul>
+<li>自底向上法、自顶向下法</li>
+<li>层次设置原则<ul>
+<li>调用关系</li>
+<li>与硬件的关系</li>
+<li>与虚存的关系</li>
+<li>可扩充性</li>
+</ul>
+</li>
+<li>调用方式<ul>
+<li>只能调用直接下层</li>
+<li>可以调用所有下层</li>
+<li>可以部分调用下层</li>
+</ul>
+</li>
+</ul>
+<h3 id="虚拟机结构"><a href="#虚拟机结构" class="headerlink" title="虚拟机结构"></a>虚拟机结构</h3><ul>
+<li>如IBM大型机上的系列操作系统</li>
+<li>基本思想为系统应该提供：<ul>
+<li>多道程序能力</li>
+<li>一个比裸机有更方便扩展界面的计算机</li>
+<li>但是二者的实现应该相互独立</li>
+</ul>
+</li>
+<li>优缺点 <ul>
+<li>虚拟机概念可以实现完全保护。</li>
+<li>用软件从硬件逐层扩展。</li>
+<li>虚拟机方法把多道程序和扩充机器的功能完全分开 了，使每一部分都简单、灵活，更易于维护。</li>
+<li>性能开销比较大。</li>
+</ul>
+</li>
+</ul>
+<h3 id="微内核结构"><a href="#微内核结构" class="headerlink" title="微内核结构"></a>微内核结构</h3><ul>
+<li>内核中只包括中断处理、进程通信（IPC）、基本调度等</li>
+<li>文件系统、网络功能、内存管理、设备管理等作为服务在微内核上运行。</li>
+<li>优点：<ul>
+<li>内核易于实现、可移植性好、配置灵活、适应分布式环境（本地内核与远程内核对服务同样的支持）。</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>速度较慢（扩大内核减少切换；减少内核提高其他优点）。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-%E5%BE%AE%E5%86%85%E6%A0%B8.jpg" alt="微内核架构"></p>
+<h3 id="机制与策略分开"><a href="#机制与策略分开" class="headerlink" title="机制与策略分开"></a>机制与策略分开</h3><ul>
+<li>灵活</li>
+<li>可扩展</li>
+</ul>
+<h2 id="1-8-目前常用操作系统的介绍"><a href="#1-8-目前常用操作系统的介绍" class="headerlink" title="1.8 目前常用操作系统的介绍"></a>1.8 目前常用操作系统的介绍</h2><h3 id="目前常用操作系统的介绍"><a href="#目前常用操作系统的介绍" class="headerlink" title="目前常用操作系统的介绍"></a>目前常用操作系统的介绍</h3><ul>
+<li>CP/M（Control Program Monitor）</li>
+<li>Windows操作系统</li>
+<li>UNIX操作系统</li>
+<li>Linux操作系统</li>
+</ul>
+<h3 id="UNIX"><a href="#UNIX" class="headerlink" title="UNIX"></a>UNIX</h3><p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-UNIX.png" alt=""></p>
+<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-Linux.png" alt=""></p>
+<h3 id="DOS"><a href="#DOS" class="headerlink" title="DOS"></a>DOS</h3><p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-DOS.png" alt=""></p>
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>该图为Windows简化版的架构，在一定程度上采用了微内核的思想。</p>
+<p><img src="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OS/summary/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA-windows%E7%AE%80%E5%8C%96.png" alt=""></p>
+<h2 id="知识点小结"><a href="#知识点小结" class="headerlink" title="知识点小结"></a>知识点小结</h2><ul>
+<li>什么是操作系统</li>
+<li>操作系统的历史</li>
+<li>操作系统的类型</li>
+<li>操作系统的特征</li>
+<li>操作系统的功能</li>
+<li>操作系统的结构</li>
+<li>常用的操作系统</li>
+</ul>
+<h2 id="课后练习（第一次作业，非标准答案）"><a href="#课后练习（第一次作业，非标准答案）" class="headerlink" title="课后练习（第一次作业，非标准答案）"></a>课后练习（第一次作业，非标准答案）</h2><ol>
+<li><p>假如没有操作系统，怎样控制硬件？</p>
+<p> 如果没有操作系统，我们需要从汇编语言开始，将汇编语言转换成相应的机器码后直接控制硬件。</p>
+</li>
+<li><p>计算机系统中不同层次接口的作用？</p>
+<p> 计算机体系结构主要包含以下四个接口：</p>
+<ul>
+<li>UI(User Interface)，用户界面，是<strong>系统和用户之间进行交互和信息交换的媒介</strong>，它实现信息的内部形式与人类可以接受形式之间的转换。用户界面是介于用户与硬件而设计彼此之间交互沟通相关软件，目的在<strong>使得用户能够方便有效率地去操作硬件以达成双向之交互</strong>，完成所希望借助硬件完成之工作。</li>
+<li>API(Application Programming Interface)，应用程序编程接口，是<strong>一些预先定义的函数</strong>，目的是<strong>提供应用程序与开发人员基于某软件或硬件得以访问一组例程的能力，而又无需访问源码，或理解内部工作机制的细节</strong>。</li>
+<li>ABI(Application Binary Interface)，应用程序二进制接口，包含了<strong>应用程序在这个系统下运行时必须遵守的编程约定</strong>。ABI总是包含<strong>一系列的系统调用和使用这些系统调用的方法</strong>，以及关于<strong>程序可以使用的内存地址和使用机器寄存器的规定</strong>。</li>
+<li>ISA(Instruction Set Architecture)，指令集架构，它在编译器编写者和处理器设计者之间提供了一个抽象层，<strong>将编程所需要了解的硬件信息从硬件系统中抽象出来</strong>。定义了机器语言程序编写者需要知道的一切，包含了存储模式、寄存器、指令集和数据类型等内容。</li>
+</ul>
+</li>
+<li><p>冯诺依曼计算机的主要特点是什么？</p>
+<p> 冯诺依曼体系计算机主要有以下特点：</p>
+<ul>
+<li>计算机有<strong>运算器、存储器、控制器、输入设备和输出设备五大部件</strong>组成。</li>
+<li>指令和数据<strong>以同等地位存放于存储器内</strong>，并可<strong>按地址访问</strong>。</li>
+<li>指令和数据均用<strong>二进制</strong>表示。</li>
+<li><strong>指令由操作码和地址码组成</strong>，操作码表示操作的性质、地址码表示操作数在存储器中的位置。</li>
+<li>指令在存储器中<strong>按顺序存放</strong>。通常，指令时顺序执行的。在特殊情况下，可根据运算结果或指定的条件来改变运算顺序。</li>
+<li>机器<strong>以运算器为中心</strong>。输入输出设备和存储器之间的数据传送通过运算器完成、</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+
+		<!个人修改>
+		<div>
+		
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:22px;">-------------本文到此结束  <i class="fa fa-paw"></i>  感谢您的阅读-----------</div>
+    
+</div>
+		
+		</div>	  
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag"># 操作系统</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/23/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%B8%89%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2/" rel="prev" title="面向对象第三单元总结博客">
+      <i class="fa fa-chevron-left"></i> 面向对象第三单元总结博客
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统总结整理第一章引论"><span class="nav-number">1.</span> <span class="nav-text">操作系统总结整理第一章引论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统课程目标"><span class="nav-number">1.1.</span> <span class="nav-text">操作系统课程目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本章复习重点"><span class="nav-number">1.2.</span> <span class="nav-text">本章复习重点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-什么是操作系统"><span class="nav-number">1.3.</span> <span class="nav-text">1.1 什么是操作系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统定义（非严格）"><span class="nav-number">1.3.1.</span> <span class="nav-text">操作系统定义（非严格）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统层次"><span class="nav-number">1.3.2.</span> <span class="nav-text">操作系统层次</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机体系结构中的接口"><span class="nav-number">1.3.3.</span> <span class="nav-text">计算机体系结构中的接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的设计目标"><span class="nav-number">1.3.4.</span> <span class="nav-text">操作系统的设计目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的作用"><span class="nav-number">1.3.5.</span> <span class="nav-text">操作系统的作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-操作系统简史"><span class="nav-number">1.4.</span> <span class="nav-text">1.2 操作系统简史</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统历史沿革"><span class="nav-number">1.4.1.</span> <span class="nav-text">操作系统历史沿革</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#冯诺依曼体系结构"><span class="nav-number">1.4.2.</span> <span class="nav-text">冯诺依曼体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#哈佛结构"><span class="nav-number">1.4.3.</span> <span class="nav-text">哈佛结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统简史"><span class="nav-number">1.4.4.</span> <span class="nav-text">操作系统简史</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1955-1965年晶体管-amp-监控系统"><span class="nav-number">1.4.5.</span> <span class="nav-text">1955~1965年晶体管&amp;监控系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批处理操作系统"><span class="nav-number">1.4.6.</span> <span class="nav-text">批处理操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1965-1980年-集成电路-amp-多道程序设计"><span class="nav-number">1.4.7.</span> <span class="nav-text">1965-1980年 集成电路&amp;多道程序设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多道程序设计"><span class="nav-number">1.4.8.</span> <span class="nav-text">多道程序设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多道批处理系统"><span class="nav-number">1.4.9.</span> <span class="nav-text">多道批处理系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分时操作系统"><span class="nav-number">1.4.10.</span> <span class="nav-text">分时操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1980-1990年-PC机-amp-微机操作系统"><span class="nav-number">1.4.11.</span> <span class="nav-text">1980-1990年 PC机&amp;微机操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1990至今-分布式与嵌入式系统"><span class="nav-number">1.4.12.</span> <span class="nav-text">1990至今 分布式与嵌入式系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的网格化"><span class="nav-number">1.4.13.</span> <span class="nav-text">操作系统的网格化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式系统"><span class="nav-number">1.4.14.</span> <span class="nav-text">分布式系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实时系统"><span class="nav-number">1.4.15.</span> <span class="nav-text">实时系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-计算机硬件简介"><span class="nav-number">1.5.</span> <span class="nav-text">1.3 计算机硬件简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-操作系统的基本实现机制"><span class="nav-number">1.6.</span> <span class="nav-text">1.4 操作系统的基本实现机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异常-exception-：陷阱-trap-和中断-interrupt"><span class="nav-number">1.6.1.</span> <span class="nav-text">异常(exception)：陷阱(trap)和中断(interrupt)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-操作系统的基本类型"><span class="nav-number">1.7.</span> <span class="nav-text">1.5 操作系统的基本类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的基本类型"><span class="nav-number">1.7.1.</span> <span class="nav-text">操作系统的基本类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-操作系统的特征和功能"><span class="nav-number">1.8.</span> <span class="nav-text">1.6 操作系统的特征和功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的特征"><span class="nav-number">1.8.1.</span> <span class="nav-text">操作系统的特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的功能"><span class="nav-number">1.8.2.</span> <span class="nav-text">操作系统的功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理机管理"><span class="nav-number">1.8.3.</span> <span class="nav-text">处理机管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储器管理（内存）"><span class="nav-number">1.8.4.</span> <span class="nav-text">存储器管理（内存）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设备管理"><span class="nav-number">1.8.5.</span> <span class="nav-text">设备管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件管理"><span class="nav-number">1.8.6.</span> <span class="nav-text">文件管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作业控制"><span class="nav-number">1.8.7.</span> <span class="nav-text">作业控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统应解决的基本问题"><span class="nav-number">1.8.8.</span> <span class="nav-text">操作系统应解决的基本问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-操作系统结构"><span class="nav-number">1.9.</span> <span class="nav-text">1.7 操作系统结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统结构"><span class="nav-number">1.9.1.</span> <span class="nav-text">操作系统结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模块接口"><span class="nav-number">1.9.2.</span> <span class="nav-text">模块接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有序分层法"><span class="nav-number">1.9.3.</span> <span class="nav-text">有序分层法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟机结构"><span class="nav-number">1.9.4.</span> <span class="nav-text">虚拟机结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#微内核结构"><span class="nav-number">1.9.5.</span> <span class="nav-text">微内核结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机制与策略分开"><span class="nav-number">1.9.6.</span> <span class="nav-text">机制与策略分开</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-目前常用操作系统的介绍"><span class="nav-number">1.10.</span> <span class="nav-text">1.8 目前常用操作系统的介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目前常用操作系统的介绍"><span class="nav-number">1.10.1.</span> <span class="nav-text">目前常用操作系统的介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UNIX"><span class="nav-number">1.10.2.</span> <span class="nav-text">UNIX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux"><span class="nav-number">1.10.3.</span> <span class="nav-text">Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOS"><span class="nav-number">1.10.4.</span> <span class="nav-text">DOS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows"><span class="nav-number">1.10.5.</span> <span class="nav-text">Windows</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点小结"><span class="nav-number">1.11.</span> <span class="nav-text">知识点小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#课后练习（第一次作业，非标准答案）"><span class="nav-number">1.12.</span> <span class="nav-text">课后练习（第一次作业，非标准答案）</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="童涛"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">童涛</p>
+  <div class="site-description" itemprop="description">现就读于北航计算机学院本科</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tongtao0305" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;tongtao0305" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:605151707@qq.com" title="E-Mail → mailto:605151707@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">童涛</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">29k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">26 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: '9SFvgtyhPQAjEFHmyLX4Vcf8-gzGzoHsz',
+      appKey: 'quJUTNI2bSwyV2hir59PSQ4G',
+      placeholder: "欢迎文明留言评论~",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: false,
+      lang: '' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
