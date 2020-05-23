@@ -46,29 +46,39 @@
   };
 </script>
 
-  <meta name="description" content="现就读于北航计算机学院本科">
-<meta property="og:type" content="website">
-<meta property="og:title" content="童涛的个人博客">
-<meta property="og:url" content="http://tongtao.me/index.html">
+  <meta name="description" content="一、梳理JML的理论基础、应用工具链情况。JML简介我们首先先来看一下JML的官方定义。  The Java Modeling Language (JML) is a behavioral interface specification language that can be used to specify the behavior of Java modules.  JML（Java Mode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面向对象第三单元博客">
+<meta property="og:url" content="http://tongtao.me/2020/05/23/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%B8%89%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2/index.html">
 <meta property="og:site_name" content="童涛的个人博客">
-<meta property="og:description" content="现就读于北航计算机学院本科">
+<meta property="og:description" content="一、梳理JML的理论基础、应用工具链情况。JML简介我们首先先来看一下JML的官方定义。  The Java Modeling Language (JML) is a behavioral interface specification language that can be used to specify the behavior of Java modules.  JML（Java Mode">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit3/openjml_1.png">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit3/openjml_2.png">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit3/openjml_3.png">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit3/jmlunitng_1.png">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit3/hw9_uml.png">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit3/hw10_uml.png">
+<meta property="og:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit3/hw11_uml.png">
+<meta property="article:published_time" content="2020-05-22T16:23:53.979Z">
+<meta property="article:modified_time" content="2020-05-23T03:22:27.981Z">
 <meta property="article:author" content="童涛">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picgo-imagehosting-1259129674.cos.ap-beijing.myqcloud.com/OO/Unit3/openjml_1.png">
 
-<link rel="canonical" href="http://tongtao.me/">
+<link rel="canonical" href="http://tongtao.me/2020/05/23/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%B8%89%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false
+    isHome: false,
+    isPost: true
   };
 </script>
 
-  <title>童涛的个人博客</title>
+  <title>面向对象第三单元博客 | 童涛的个人博客</title>
   
 
 
@@ -183,10 +193,10 @@
             
 
   <div class="posts-expand">
-        
+      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://tongtao.me/2020/05/23/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%B8%89%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -200,8 +210,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/23/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%B8%89%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">面向对象第三单元博客</a>
+          面向对象第三单元博客
         </h1>
 
         <div class="post-meta">
@@ -216,6 +225,13 @@
             </span>
 
           
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
   
   <span class="post-meta-item">
     
@@ -254,7 +270,7 @@
     <div class="post-body" itemprop="articleBody">
 	
       
-          <h2 id="一、梳理JML的理论基础、应用工具链情况。"><a href="#一、梳理JML的理论基础、应用工具链情况。" class="headerlink" title="一、梳理JML的理论基础、应用工具链情况。"></a>一、梳理JML的<strong>理论基础、应用工具链</strong>情况。</h2><h3 id="JML简介"><a href="#JML简介" class="headerlink" title="JML简介"></a>JML简介</h3><p>我们首先先来看一下JML的官方定义。</p>
+        <h2 id="一、梳理JML的理论基础、应用工具链情况。"><a href="#一、梳理JML的理论基础、应用工具链情况。" class="headerlink" title="一、梳理JML的理论基础、应用工具链情况。"></a>一、梳理JML的<strong>理论基础、应用工具链</strong>情况。</h2><h3 id="JML简介"><a href="#JML简介" class="headerlink" title="JML简介"></a>JML简介</h3><p>我们首先先来看一下JML的官方定义。</p>
 <blockquote>
 <p>The Java Modeling Language (JML) is a behavioral interface specification language that can be used to specify the behavior of Java modules.</p>
 </blockquote>
@@ -424,396 +440,39 @@
 <p>我个人认为，这个单元的主要目标并不是为了掌握一门JML语言在以后的实际学习工作中使用，而是学习一种思想，一种契约化的思想，一种设计和实现的分离的思想，我觉得这才是我们这个单元学习的重点所在。</p>
 <p>不过我们也不难发现，JML的相关工具链还是存在不完善、缺少维护的问题，而就目前看来如此的形式化规格表述也存在着过于繁琐复杂的问题，期待未来能有更加完善的生态环境以及更加优化的语法形式的出现。</p>
 
-      
     </div>
 
 
 		<!个人修改>
 		<div>
 		
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:22px;">-------------本文到此结束  <i class="fa fa-paw"></i>  感谢您的阅读-----------</div>
+    
+</div>
+		
 		</div>	  
 
     
     
-      
-	  <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+    
+
+      <footer class="post-footer">
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://tongtao.me/2020/01/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="童涛">
-      <meta itemprop="description" content="现就读于北航计算机学院本科">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="童涛的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">计算机组成课程设计总结</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-01-14 15:08:35 / 修改时间：15:24:23" itemprop="dateCreated datePublished" datetime="2020-01-14T15:08:35+08:00">2020-01-14</time>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/01/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/01/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>6.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-	
-      
-          <h1 id="计算机组成课设总结"><a href="#计算机组成课设总结" class="headerlink" title="计算机组成课设总结"></a>计算机组成课设总结</h1><p>&emsp;&emsp;首先要明确的是，计算机组成理论课和计算机组成课程设计是分开独立的两门课，前者学分是4分，后者仅有1.5分（1806）。尽管理论课学分较高，但是就课下花的时间而言，课设占用了绝大部分学习计组的时间乃至是课余的时间。</p>
-<p>&emsp;&emsp;读到这里，你可能会想我何必花这么时间在这么一个只有1.5学分，甚至不如一些通识课的课上呢？功利地讲，只有通过P5你才有可能及格，也就是说通过P5是你计组才是你及格的必须条件，这也要求你必须相对认真地学习这门课。就个人的发展而言，这是计算机专业非常重要的专业课之一，对你的未来的下一步学习，还是你的个人发展，都是非常有帮助的。</p>
-<p>&emsp;&emsp;接下来，我就从计组课设的进展，依次谈一谈我个人的相关心得和体会。</p>
-<h2 id="PRE-基础知识及必备工具"><a href="#PRE-基础知识及必备工具" class="headerlink" title="PRE 基础知识及必备工具"></a>PRE 基础知识及必备工具</h2><p>&emsp;&emsp;在这一阶段，你有大概一个月的时间根据相关教程自己学习相关工具的使用，其中包括Logisim、Verilog、MARS（MIPS）三项工具。在这三项工具中，我们可以逐渐了解到一个CPU从最底层的寄存器门电路到用代码实现相关电路设计，以及把自己的MIPS指令运行在自己设计的CPU上的过程。</p>
-<p>&emsp;&emsp;可以说，这个阶段的学习为整个学期接下来的学习打下了坚实的基础。一般来说，机组课设每周的测试会在国庆假期后的那周开始。之后，你的一周可能就会陷入“还有XXX天就要计组上机了”和“计组上机刚过去了XXX天，咋又要上机了”的循环之中。</p>
-<h2 id="P0-Logisim简单部件与状态机"><a href="#P0-Logisim简单部件与状态机" class="headerlink" title="P0 Logisim简单部件与状态机"></a>P0 Logisim简单部件与状态机</h2><p>&emsp;&emsp;想要设计一个部件，最初的也是非常重要的一步就是确定输入和输出的信号端口以及该部件需要实现的功能。之后就可以针对相对需求选择时序电路或者是组合电路，再进行下一步具体的电路搭建。</p>
-<p>&emsp;&emsp;P0的课下难度并不大，其中有部分是为了P3搭建Logisim单周期CPU做准备。</p>
-<p>&emsp;&emsp;P0的课上习题，一般来说第一题是一个状态机相关的题目，做这道题目的时候尤其要注意判断是Moore还是Mealy类型的状态机，也就是输出与当前的状态是否有关。第二题一般是比较简单的送分题，只要按照题目要求搭建就不会出太大的问题。至于第三题，一般会稍微有点复杂，我们第一次上机考试考察了与反码有关的题目，但是只要在搭建的时候能保持思路清晰，注意一些特殊情况，AK的难度也并没有很大。</p>
-<h2 id="P1-Verilog简单部件与状态机"><a href="#P1-Verilog简单部件与状态机" class="headerlink" title="P1 Verilog简单部件与状态机"></a>P1 Verilog简单部件与状态机</h2><p>&emsp;&emsp;我觉得P1跟P0都是相对简单的关卡，这两个主要都是之后的CPU会使用到的一些部件以及对于状态机的考察。不管是课下还是上机，都是比较容易的。</p>
-<p>&emsp;&emsp;在这个阶段，我觉得虽然难度不大，但是你应该从P1课下开始就养成相对良好的Verilog的编程习惯，不管是缩进、并列还是注释，都要尽量规范起来。这里的规范也倒不是说有什么统一的标准，主要的要求就是直观易懂，不管是你自己还是其他人，提高代码的可读性以及可维护性。这样，你在P4之后debug的时候能省心很多。</p>
-<h2 id="P2-MIPS指令集及汇编语言"><a href="#P2-MIPS指令集及汇编语言" class="headerlink" title="P2 MIPS指令集及汇编语言"></a>P2 MIPS指令集及汇编语言</h2><p>&emsp;&emsp;就我个人而言，在刚接触汇编语言的时候确实遇到了一些困难。主要是对常用的指令还不了解其功能，同时对汇编语言整体的代码结构也还不明确，所以在一开始会有一种无从下手的感觉。没有了C语言中明确的输入输出和变量来保存数据。你所能掌控的就是那32个寄存器以及syscall的系统指令。不过相信我，你只要能按图索骥，按照教程的介绍，理解一个完整的汇编程序开始，一切都会慢慢好起来的。</p>
-<p>&emsp;&emsp;我觉得从P2相对前两个Project代码量会稍微大一些，尤其是你要先写出相应的C语言代码然后再转化成汇编语言，也就是说你要经历两次debug的过程。不过，等你对汇编语言的结构有了一定的了解，并且也能相对熟练写汇编代码之后，你会发现只要能写出正确的C语言代码，再转化成MIPS语言其实是不太容易出错的。毕竟C语言中的每一种结构，不管是选择还是循环，都有相对固定的汇编语言的模板。还是只要在编写的时候注意一些细节，我觉得转化成汇编语言的这一步并不会出现太多问题。</p>
-<p>&emsp;&emsp;在课上，我记得第三题是给出C语言代码让你翻译的，前两题的C语言代码也不会太难，只要注意把控好时间，像在学习C语言的时候一样尽量避免低级错误，应该都没有太大问题。</p>
-<p>&emsp;&emsp;毕竟，在P2之前，我们还没有搭建起一个完整的CPU呢！</p>
-<h2 id="P3-Logisim单周期"><a href="#P3-Logisim单周期" class="headerlink" title="P3 Logisim单周期"></a>P3 Logisim单周期</h2><p>&emsp;&emsp;来了来了，他来了，他带着CPU走来了！</p>
-<p>&emsp;&emsp;是的，到了P3我们就要开始搭建我们第一个完整的CPU了，说到这里是不是有点小激动，那我们就快点开始吧！</p>
-<p>&emsp;&emsp;在开始搭建这个CPU的细节之前，有一个在这个乃至之后的Project都很重要的事情——确定你的<strong>数据通路和CPU的整体架构</strong>。因为P3的单周期还比较简单，整体架构也还较为单一，不过从开头就确定一个相对较为科学，尤其是对我们上机尤为重要的<strong>可扩展性优秀</strong>的架构，是十分必要的。</p>
-<p>&emsp;&emsp;回到P3，在这个阶段由于指令并不多，也只是单周期的CPU，所以在结构并没有太大的不同，如果硬说要有的话，那就只有IFU（取指令单元）要不要拆分成PC和IM两个模块了，我个人做法是拆分的，不过在P3两种方案均可。除此之外，根据计组理论课PPT的数据通路或者黑皮书上数据通路来搭建你的第一个CPU都是不错的选择。</p>
-<p>&emsp;&emsp;我觉得P3难度并不大，但是学习收获却很可观。P3通过直观的电路图的方式，让你体会到了一条指令在CPU内部的“旅行”过程。我们知道，一条指令会经过IF、ID、EX、DM、WB五个阶段，在每个阶段就会根据不同的任务有不同的部件，再加上MUX等器件就可以搭建出完整的CPU啦。</p>
-<h2 id="P4-Verilog单周期"><a href="#P4-Verilog单周期" class="headerlink" title="P4 Verilog单周期"></a>P4 Verilog单周期</h2><p>&emsp;&emsp;P4从某种程度上来说，可以看作是将Logisim搭建的P3单周期流水线CPU转化成了Verilog搭建的CPU。从直观的电路图到用代码写成的CPU。虽然P4不如P3搭建的电路图那样直观，不过用代码搭建CPU在效率有了明显的提高。为之后进一步新增指令打下了良好的基础。</p>
-<p>&emsp;&emsp;从P4开始到P6都是在Verilog的基础上对原有的CPU进行升级改造，上机测试则以新增指令的方式来考察你对该CPU的掌握情况。上级过程一般会新增三条指令，第一条指令必做，做出两条就算通过。而这三条指令在我们多次上机之后，也总结出了一定的规律。</p>
-<ul>
-<li>首先第一条指令多半是Branch类型的指令，就是根据寄存器中的数值来决定要不要进行跳转。</li>
-<li>第二条指令则多半是运算相关的指令，这也是三条中相对比较简单的一题，一般来说，只要先将该条指令分类到R型指令或者I型指令，然后在控制器中新增一个Opcode，并在ALU的并列结构中新增一个运算方式即可。不过这有时候也会出现一些跟循环相关的指令，比如<strong>CLZ</strong>，字面意思就是 count left-zero，也就是寄存器中的数字在第一个1左侧存在的0的个数。这时候在ALU内部就不能简单地增加一个并列项了，要另外新增一条循环语句。同时也要注意，<strong>全部都是0以及没有0的特殊情况</strong>。</li>
-<li>最后一条指令多半是跟DM相关的指令，可能会稍有一些难度。</li>
-</ul>
-<p>&emsp;&emsp;总体而言，P4还只是CPU搭建的基础而已。我觉得计组最重要的部分——在P5和P6。</p>
-<h2 id="P5-Verilog流水线（MIPS-lite2指令集）"><a href="#P5-Verilog流水线（MIPS-lite2指令集）" class="headerlink" title="P5 Verilog流水线（MIPS-lite2指令集）"></a>P5 Verilog流水线（MIPS-lite2指令集）</h2><p>&emsp;&emsp;从单周期到流水线，从字面上看，增加了五级流水线。但是更重要的是，增加了相关指令的<strong>暂停和转发</strong>的处理。</p>
-<p>&emsp;&emsp;接下来，我们先来看看黑皮书上流水线CPU的结构。</p>
-<p><img src="http://cscore.net.cn/assets/courseware/v1/fd1c9b4ae274ebfd855ac6b0e3597ad1/asset-v1:Internal+B3I062410+2019_T1+type@asset+block/P5.1_L1_1.png" alt="img"></p>
-<p>&emsp;&emsp;从图中可以很清晰地看出，蓝色线条标注的部分就是我们这个Project新加的部分。</p>
-<p> &emsp;&emsp;接下来，我来讲一些我个人对于P5搭建的建议。</p>
-<p>&emsp;&emsp;首先我认为在搭建具体部件之前<strong>提前规划好信号的命名非常重要</strong>，以ID阶段产生的MemtoReg信号为例，如果你采用集中式译码，那么在mips.v中就会出现MemtoReg_D、MemtoReg_E、MemtoReg_M、MemtoReg_W四个信号，如果你没有在具体搭建之前就相关信号的命名做出相对合理的规划。那么不管是你在搭建过程中还是在debug过程中，抑或是在之后的P6-P8对CPU进行修改时都会遇上不小的麻烦。</p>
-<p>&emsp;&emsp;之后，我建议借鉴P6的做法可以在<strong>ID阶段增加计算下一个PC值的NPC模块</strong>，然后将Branch和Jump信号都接入这一模块，将这一模块的输出接到PC就可以。不仅可以有个独立的部件计算NPC的值，同时也可以更方便地处理上机的第一条新增的Branch类型指令。同时在ID阶段判断Branch、Jump类型指令也可以直接让延迟槽中的指令得以继续运行。</p>
-<p>&emsp;&emsp;个人更推荐<strong>分布式译码器来生成控制信号</strong>，这个其实影响并不是很大，但是分布式译码器随用随取的思路可以有效减少流水线寄存器中的信号。再拿之前的MemtoReg信号为例，若采用分布式译码，则就只会产生MemtoReg_W一个信号，相比集中式译码要简洁很多。同时我建议，<strong>就算一个信号在整个CPU中只出现了一次，在命名时也尽量加上其所在的阶段</strong>，这也还是为了代码能有更好的可维护性。</p>
-<p>&emsp;&emsp;此外，我还建议除了PPT中的表格法判断暂停和转发外，认真理解一下教程中<strong>暴力转发法，尤其是标记转发法</strong>的内容。尽管在P5指令数并不多，有关的冲突也可以在表格上明确地体现出来，但是为了之后的P6考虑，提前准备好更好的转发方案是十分有必要的。</p>
-<p>&emsp;&emsp;关于暂停，我觉得教程中的思路是可行也是我个人较为推荐的，我本人暂时也没有想到更好地处理暂停的方式。我们的CPU是“五三”的数据结构——五个数据需求位点，三个数据产生位点。我建议，<strong>在指令到达ID流水线寄存器的阶段时就对暂停进行判断</strong>，根据指令的类型判断在五个数据需求点是否有数据的需求，然后分析EX、MEM、WB的指令是否有写回地址（A3）跟ID阶段指令需求位点的寄存器地址相同的指令。然后根据这些指令能否在ID阶段指令到达需要数据的阶段之前就生产所需要的数据，进而分别进行暂停或者转发。</p>
-<p>&emsp;&emsp;在这里，我也要小小地吐槽一下教程关于标记转发法的讲解。不过，我们需要知道的是，标记转发法是计算机学院计组一代一代传下来的方法，直到一位17级的大佬学长（shh）对其进行的一定程度的归纳才有了“标记转发法”这个名字。但是我在跟学长交流的过程中，学长也坦承说关于标记转发法并没有一个明确的定义，最主要的目标是能够尽量不改变CPU原有结构的基础上较为简单地添加新的指令，也就是满足我们上机的需求。同时由于标记转发法并不是一个严谨的学术概念，在百度谷歌等平台也搜索不到相关的信息，所以“标记转发法”作为一种更好地实现数据转发的思路还需要一届届助教以及大佬能对其进行优化，写出更好的教程造福更多的同学。</p>
-<h2 id="P6-Verilog流水线（MIPS-C3指令集）"><a href="#P6-Verilog流水线（MIPS-C3指令集）" class="headerlink" title="P6 Verilog流水线（MIPS-C3指令集）"></a>P6 Verilog流水线（MIPS-C3指令集）</h2><p>&emsp;&emsp;这个Project的CPU相比P5在结构上主要增加了乘除器和CP0，除此之外更大的考验是在面对如此多的指令时，如何更好地处理转发和暂停的问题。关于暂停和转发的实现我在P5已经简单阐述过了。我觉得只要能用标记转发法或者类似的思想完成Verilog流水线CPU的开发，P5和P6其实也是挺简单的。但是如果是按照教程中的表格法硬刚P6的同学，那我只能自叹不如。</p>
-<p>&emsp;&emsp;针对我们2018级上机的试题，我进行了简单的汇总，如下：</p>
-<ul>
-<li><p>11月28日：blezals + msub + lhs</p>
-<p>​        第一条指令是若小于等于零则进行无条件跳转，第二条是公版指令，可以前往完整的英文版的MIPS指令库查看，第三条是lh的修改版，在半字节地址未对齐时不写入。其实P6的测试的指令都大同小异，分别是一个Branch指令，一个运算相关指令，还有一个DM相关指令。</p>
-</li>
-</ul>
-<ul>
-<li><p>12月5日：blezals + madd + lwpl</p>
-</li>
-<li><p>12月12日：bgezalr + clz + lhs</p>
-</li>
-</ul>
-<p>&emsp;&emsp;有没有感觉这几次上机的指令有些类似呢，所以如果你在之前的P挂过的话，不妨问问进度较快的室友或者别的同学他们上机的指令，可以在课下偷偷地悄悄地提前先加上。对了，我在考P5的时候，第三条新加的指令是P6要求的指令，我在课下就已经完成了P6的设计，所以在课上第三题就直接过啦。所以有时候，课下还是可以多做点准备的。</p>
-<h2 id="P7-MIPS微体系——异常和中断"><a href="#P7-MIPS微体系——异常和中断" class="headerlink" title="P7 MIPS微体系——异常和中断"></a>P7 MIPS微体系——异常和中断</h2><p>&emsp;&emsp;P7所要求的主要任务正如标题中写的那样，异常和中断。</p>
-<p>&emsp;&emsp;异常和中断要达到的效果就是将PC值跳转到0x00004180，从而进入异常处理程序。</p>
-<p>&emsp;&emsp;P7相对P6而言，在mips.v内部增加了CP0部件，在外部增加了I/O设备以及沟通mips.v和I/O设备的Bridge部件。同时，由于CP0部件的加入，在指令集上也加入了MTC0、MFC0、ERET三条指令以便进行中断异常处理。</p>
-<p>&emsp;&emsp;P7使用计时器来模拟外部设备的，同时也可以产生外部的中断信号HWInt；在内部，则根据不同的异常情况，生成不同的ExcCode。</p>
-<p>&emsp;&emsp;P7的上机测试可以说是非常奇葩了，因为课上并不需要你新加指令或者完成新的功能。只需要你能通过数据以及中断和异常的时机更加刁钻的强测。但是P7相对来说又很难在课上那么短的时间内在不明确问题具体出在哪里的情况下找出并纠正错误。所以一直有一种说法——“P7 choose from 2min or 2h”。</p>
-<h2 id="P8-上板子了！FPGA实现MIPS微系统"><a href="#P8-上板子了！FPGA实现MIPS微系统" class="headerlink" title="P8 上板子了！FPGA实现MIPS微系统"></a>P8 上板子了！FPGA实现MIPS微系统</h2><p>&emsp;&emsp;有资格做P8的同学，可以说已经是克服了重重障碍，来到了最后一关。虽然助教说P8可以称为是奖励关卡，但是想完成这一关卡并且获得最终的奖励也并不是一件非常容易的事情。整体而言，我们的目标是将P7的CPU从可仿真的标准提高到可综合，也就是可以成为一个真正硬件，说到这里是不是感觉很厉害，成就感渐渐涌上心头？嗯，那就继续往下看吧！</p>
-<p>&emsp;&emsp;P8主要是在P7的基础上加入了更多的IO设备，并且通过IO设备的中断信号来使PC进入中断处理程序并完成相应的任务。在我们的Project中，我们通过将IO设备当作寄存器的方式来完成相关信号的处理。而P8的检测方式，则是在你设计的硬件基础上，自己编写相应的MIPS代码来实现相应的功能。我们接下来来看一下P8的整体结构（图片来自CSCORE的P8教程，其中有横线的就是我们跟P7不同的部件），并分析一下P8相对于P7的不同。</p>
-<p><img src="http://cscore.net.cn/assets/courseware/v1/08719d7a305864e19df44a91efd498c0/asset-v1:Internal+B3I062410+2019_T1+type@asset+block/P8_M1_T2_1.png" alt="img"></p>
-<p>&emsp;&emsp;从P7到P8，我推荐按照以下的步骤进行修改：</p>
-<ul>
-<li>用FPGA内置的时钟信号替代P7中外部传入的时钟信号（难度：0.5星）</li>
-<li>用Block RAM模块代替原来的IM和DM模块（难度：0.5星）</li>
-<li>增加IO设备中的8位用户按键驱动（难度：1星）</li>
-<li>增加IO设备中的32位LED驱动（难度：1星）</li>
-<li>增加IO设备中的64位拨码开关驱动（难度：1星）</li>
-<li>增加并修改IO设备中的串口通信系统控制器（难度：2星）</li>
-<li>根据6个外设按照相关要求对Bridge进行修改（难度：1.5星）</li>
-<li>将自己设计的CPU相关要求进行测试（难度：3星）</li>
-<li>根据自己设计的CPU按照相关程序要求编写MIPS程序（难度：1.5星，部分难，部分简单）</li>
-</ul>
-<p>&emsp;&emsp;个人觉得P8中有挑战性的部分还是如何将各个部件进行综合并验证自己设计的正确性。其实每个IO部分分别而言并不是很难，有些甚至可以说是挺简单的，比如前面提到的难度为1星的步骤。但是P8在综合过程中还是会遇到或多或少的小问题。尤其是P8每次修改代码后需要进行较长时间的综合仿真、布线生成等步骤，也就是说每次修改代码的时间成本会比之前多很多。</p>
-<p>&emsp;&emsp;此外，还有不得不提及的一点，部分同学在开始做P8时还会遇到ISE软件的问题（<del>比如我</del>），你可以在P8答疑群中问问有没有同学遇到了类似的问题以及他的解决方案，遇事不决就重装，至少我是这么解决的。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>&emsp;&emsp;计组课设是大二上一门非常重要的课程，我这里指的当然不是它学分有多高，而是其对于我们的工程化思维以及计算机专业能力有非常大的帮助。</p>
-<p>&emsp;&emsp;现在想来，这也算是我到目前为止，工程量最大，花费时间最长，消耗精力最多，同时也是成就感最大的一门课程了吧。学期结束之后，回首这一学期为计组熬过的夜，为计组没过难受的日子，为计组debug焦虑的时光，为计组上机紧张的时光，都伴随着种种成就感，种种满足，成为了我脑海中挥之不去的美好记忆！</p>
-
-      
-    </div>
-
-
-		<!个人修改>
-		<div>
-		
-		</div>	  
-
-    
-    
-      
-	  <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://tongtao.me/2020/01/11/%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E4%B8%8E%E7%8E%B0%E6%9C%89%E7%A0%94%E7%A9%B6%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="童涛">
-      <meta itemprop="description" content="现就读于北航计算机学院本科">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="童涛的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/11/%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E4%B8%8E%E7%8E%B0%E6%9C%89%E7%A0%94%E7%A9%B6%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB/" class="post-title-link" itemprop="url">联邦学习与现有研究的区别和联系</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-01-11 19:05:22 / 修改时间：19:24:28" itemprop="dateCreated datePublished" datetime="2020-01-11T19:05:22+08:00">2020-01-11</time>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/01/11/%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E4%B8%8E%E7%8E%B0%E6%9C%89%E7%A0%94%E7%A9%B6%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/01/11/%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E4%B8%8E%E7%8E%B0%E6%9C%89%E7%A0%94%E7%A9%B6%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>790</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-	
-      
-          <h1 id="联邦学习与现有研究的区别和联系"><a href="#联邦学习与现有研究的区别和联系" class="headerlink" title="联邦学习与现有研究的区别和联系"></a>联邦学习与现有研究的区别和联系</h1><h2 id="差分隐私理论"><a href="#差分隐私理论" class="headerlink" title="差分隐私理论"></a>差分隐私理论</h2><p>​        联邦学习采用的是<strong>加密机制下的参数交换的方式</strong>，加密手段包括同态加密等。与传统的差分隐私保护方式相比，<strong>其自身的数据和模型并不会发生传输</strong>，这样也就不会产生数据泄露的问题，同时也可以避免一些严格的法律程序例如GDPR带来的麻烦。</p>
-<p>​        而差分隐私保护理论以及其它的传统的隐私保护方法，更多的是在数据中添加噪点，或者用概括化的方法模糊某些敏感的属性，直到第三方无法区别个体为止，也就是说其主要目标是<strong>数据不可被还原</strong>，以此来保护用户隐私。但是从本质上来说，这些方法还是<strong>有原始数据的传输</strong>，存在被攻破的风险。</p>
-<h2 id="分布式机器学习"><a href="#分布式机器学习" class="headerlink" title="分布式机器学习"></a>分布式机器学习</h2><p>​        分布式机器学习包括了数据分布式存储、计算任务分布式运行、模型结果分布式发布等多个方面。以参数服务器为例，他将数据存储在不同的节点上，通过<strong>一个中心式的调度节点来调配数据和计算资源</strong>，以便更加高效地获得最终的训练模型。</p>
-<p>​        而对于联邦学习而言，最重要的一点是<strong>数据拥有方对数据拥有完全的自治权限</strong>，可以自主选择何时加入学习模型，相对在参数服务器中，中心节点始终占据着主导地位，这也导致联邦学习面对的是一个更加复杂的学习环境；其次，联邦学习<strong>更加注重训练过程中对于数据拥有方的隐私保护</strong>，能够更好地应对未来日趋严格的数据保护需求和安全监管环境。</p>
-<h2 id="联邦数据库"><a href="#联邦数据库" class="headerlink" title="联邦数据库"></a>联邦数据库</h2><p>​        联邦数据库是将不同的单元数据库进行集成，并对集成后的数据整体进行管理的系统。它的提出是为了<strong>实现对多个独立数据库的相互操作</strong>。虽然联邦数据库在数据的类型和存储方式上与联邦学习有许多相似之处，但是，<strong>联邦数据库在各个单元数据交互的过程中不涉及任何的隐私保护机制</strong>，所有单元数据库对管理系统的都是可见的。此外<strong>联邦数据库的重心在于插入、删除、查找、合并等各种数据库的基本操作</strong>，而联邦学习的目的在于保护数据隐私的前提下对各个数据建立一个联合模型，让数据中的隐藏的模式和规律发挥更大的价值。</p>
-<h1 id="联邦学习相关技术突破"><a href="#联邦学习相关技术突破" class="headerlink" title="联邦学习相关技术突破"></a>联邦学习相关技术突破</h1><h2 id="动态加密"><a href="#动态加密" class="headerlink" title="动态加密"></a>动态加密</h2>
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/" rel="prev" title="计算机组成课程设计总结">
+      <i class="fa fa-chevron-left"></i> 计算机组成课程设计总结
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-
-		<!个人修改>
-		<div>
-		
-		</div>	  
-
-    
-    
-      
-	  <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://tongtao.me/2020/01/11/%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E7%AB%A5%E6%B6%9B%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="童涛">
-      <meta itemprop="description" content="现就读于北航计算机学院本科">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="童涛的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/11/%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E7%AB%A5%E6%B6%9B%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">欢迎来到童涛的个人博客</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-01-11 14:45:06 / 修改时间：18:55:11" itemprop="dateCreated datePublished" datetime="2020-01-11T14:45:06+08:00">2020-01-11</time>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
     
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/01/11/%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E7%AB%A5%E6%B6%9B%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/01/11/%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E7%AB%A5%E6%B6%9B%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>435</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-	
-      
-          <p>​        非常欢迎大家来到我的个人博客。</p>
-<p>​        首先要说明的是，这个博客基于GitHub Pages和Hexo建立，在NeXT. Gemini主题的基础上加以修改而来。由于服务器位于国外，所以在国内访问偶尔会出现加载速度慢甚至加载不出来的情况。如果大家发现网站存在bug或者文字中有不妥之处，想跟我交流，可以点击页面左侧的个人介绍栏邮箱链接跟我联系。同时我会在我的GitHub主页内，上传我所写的代码，大家可以前去查看交流。</p>
-<p>​        在这里，我会跟大家分享如下内容：    </p>
-<ol>
-<li><p>北航计算机学院相关课程的总结与收获</p>
-</li>
-<li><p>参加的北航冯如杯项目介绍与进展</p>
-</li>
-<li><p>参与的实验室<del>非涉密</del>项目的心得体会</p>
-</li>
-<li><p>课余时间的读书和观影报告</p>
-</li>
-<li><p>一些零零散散的个人随笔</p>
-</li>
-</ol>
-<p>​        用文字记录学习以及生活是一件很有意思的事情，我会尽量坚持更新这个博客。同时在近期，我也会增加留言板等功能以丰富这个网站的交互体验，敬请期待。</p>
-<p>​        最后，我一直相信，每个故事都会有个美好的结局，如果现在还不够美好，那是因为还没有到终点。希望大家一起坚持努力，乐观积极地迎接生活的挑战！</p>
-<p>​        祝好！</p>
-
-      
-    </div>
-
-
-		<!个人修改>
-		<div>
-		
-		</div>	  
-
-    
-    
-      
-	  <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
   </article>
   
   
@@ -821,12 +480,10 @@
 
   </div>
 
-  
-
-
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -873,6 +530,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、梳理JML的理论基础、应用工具链情况。"><span class="nav-number">1.</span> <span class="nav-text">一、梳理JML的理论基础、应用工具链情况。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JML简介"><span class="nav-number">1.1.</span> <span class="nav-text">JML简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JML语法"><span class="nav-number">1.2.</span> <span class="nav-text">JML语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注释结构"><span class="nav-number">1.2.1.</span> <span class="nav-text">注释结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表达式"><span class="nav-number">1.2.2.</span> <span class="nav-text">表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法规格"><span class="nav-number">1.2.3.</span> <span class="nav-text">方法规格</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型规格"><span class="nav-number">1.2.4.</span> <span class="nav-text">类型规格</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JML工具链"><span class="nav-number">1.3.</span> <span class="nav-text">JML工具链</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、部署SMT-Solver，至少选择3个主要方法来尝试进行验证，报告结果有可能要补充JML规格"><span class="nav-number">2.</span> <span class="nav-text">二、部署SMT Solver，至少选择3个主要方法来尝试进行验证，报告结果有可能要补充JML规格</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#首次尝试"><span class="nav-number">2.1.</span> <span class="nav-text">首次尝试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parsing-and-Type-checking"><span class="nav-number">2.2.</span> <span class="nav-text">Parsing and Type-checking</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Extended-Static-Checking"><span class="nav-number">2.3.</span> <span class="nav-text">Extended Static Checking</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、部署JMLUnitNG-JMLUnit，针对Group接口的实现自动生成测试用例，并结合规格对生成的测试用例和数据进行简要分析"><span class="nav-number">3.</span> <span class="nav-text">三、部署JMLUnitNG&#x2F;JMLUnit，针对Group接口的实现自动生成测试用例，并结合规格对生成的测试用例和数据进行简要分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、按照作业梳理自己的架构设计"><span class="nav-number">4.</span> <span class="nav-text">四、按照作业梳理自己的架构设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、按照作业分析代码实现的bug和修复情况"><span class="nav-number">5.</span> <span class="nav-text">五、按照作业分析代码实现的bug和修复情况</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一次作业"><span class="nav-number">5.1.</span> <span class="nav-text">第一次作业</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二次作业"><span class="nav-number">5.2.</span> <span class="nav-text">第二次作业</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三次作业"><span class="nav-number">5.3.</span> <span class="nav-text">第三次作业</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、阐述对规格撰写和理解上的心得体会"><span class="nav-number">6.</span> <span class="nav-text">六、阐述对规格撰写和理解上的心得体会</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
